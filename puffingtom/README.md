@@ -1,7 +1,9 @@
 Star Legend To Lua 逻辑API
 ======================
 
-###<h2 id="user">1.用户模块(module=user)</h2>
+1.用户模块 user
+----------------------
+
 ####1.01 login(params)<a id="user_login"></a>
 用户登录 同步数据，和数据初始化  
 

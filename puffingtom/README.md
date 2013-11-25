@@ -3016,6 +3016,7 @@ return result
             "collector":[
                 {
                     "index":1,
+                    "level":2,
                     "currentCount":"服务器返回的当前产量",
                     "lootCount":"被抢走的量"
                 },
@@ -3024,6 +3025,7 @@ return result
             "storage":[
                 {
                     "index":1,
+                    "level":3,
                     "currentCount":"当前存储量",
                     "lootCount":"被抢走的量"
                 },
@@ -3034,6 +3036,7 @@ return result
             "collector":[
                 {
                     "index":1,
+                    "level":3,
                     "currentCount":"服务器返回的当前产量",
                     "lootCount":"被抢走的量"
                 },
@@ -3042,6 +3045,7 @@ return result
             "storage":[
                 {
                     "index":1,
+                    "level":4,
                     "currentCount":"当前存储量",
                     "lootCount":"被抢走的量"
                 },
@@ -3054,7 +3058,6 @@ return result
 ####传出参数
 ```json
 {
-    "architecture":"建筑模块的用户数据",
     "resource":{
         "gold":{
             "collector":[

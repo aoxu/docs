@@ -3063,6 +3063,7 @@ return result
             "collector":[
                 {
                     "index":1,
+                    "level":2
                     "finishedMoment":"产满的完成时刻",
                 },
                 ...
@@ -3070,6 +3071,7 @@ return result
             "storage":[
                 {
                     "index":1,
+                    "level":3,
                     "currentCount":"当前存储量"
                 },
                 ...
@@ -3079,6 +3081,7 @@ return result
             "collector":[
                 {
                     "index":1,
+                    "level":3,
                     "finishedMoment":"产满的完成时刻",
                 },
                 ...
@@ -3086,6 +3089,7 @@ return result
             "storage":[
                 {
                     "index":1,
+                    "level":4,
                     "currentCount":"当前存储量",
                 },
                 ...

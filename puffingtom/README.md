@@ -4,7 +4,7 @@ Star Legend Lua API
 用户模块 user
 ----------------------
 
-####1.01 login(params)<a id="user_login"></a>
+### login
 用户登录 同步数据，和数据初始化  
 
 ####传入参数  
@@ -24,7 +24,7 @@ Star Legend Lua API
 
 - - -
 
-####1.02 getUserInfo()<a id="user_getUserInfo"></a>
+### getUserInfo
 获取客户端用户信息  
 
 
@@ -66,9 +66,9 @@ ps:数据结构待定
 
 * -102,信息不存在 
 
-- - - -
 
-####1.03 getUserGold()<a id="user_getUserGold"></a>
+
+### getUserGold
 获取用户金矿存储金币总额
 
 ####传入参数
@@ -79,10 +79,6 @@ ps:数据结构待定
 }
  
 ```
-
-
-
-
 ######返回信息：
 
 ```
@@ -96,9 +92,9 @@ ps:数据结构待定
 
 #####错误情况
 * -102,信息不存在
-- - - -
 
-####1.04 addGold(params)<a id="user_addGold"></a>
+
+### addGold
 增加金币到金矿存储  
 ####传入参数
 
@@ -123,9 +119,9 @@ ps:金币库存已满 金币就会被系统吞掉
 #####错误情况
 * -101,参数错误
 * -102,信息不存在
-- - - -
 
-####1.05 deductGold(params)<a id="user_deductGold"></a>
+
+### deductGold
 扣除金矿中的金币库存  
 ####传入参数
 
@@ -152,9 +148,9 @@ ps:金币库存已满 金币就会被系统吞掉
 * -101,参数错误
 * -102,信息不存在
 * -103,金币不足 
-- - - -
 
-####1.06 getUserGem()<a id="user_getUserGem"></a>
+
+### getUserGem
 查询宝石总数
 ####传入参数
 ```
@@ -176,9 +172,9 @@ ps:金币库存已满 金币就会被系统吞掉
 #####错误情况
 * -101,信息不存在
  
-- - - -
 
-####1.07 addGem(params)<a id="user_addGem"></a>
+
+### addGem
 增加宝石  
 ####传入参数
 
@@ -204,9 +200,9 @@ ps:金币库存已满 金币就会被系统吞掉
 * -102，参数错误
 
  
-- - - -
 
-####1.08 deductGem(params)<a id="user_deductGem"></a>
+
+### deductGem
 扣除宝石  
 ####传入参数
 
@@ -229,9 +225,9 @@ ps:金币库存已满 金币就会被系统吞掉
 * -101，信息不存在
 * -104，宝石不足
  
-- - - -
 
-####1.09 getIdleBuilder()<a id="user_getIdleBuilder"></a>
+
+### getIdleBuilder
 获取空闲builder 个数
 ####传入参数
 
@@ -253,9 +249,9 @@ ps:金币库存已满 金币就会被系统吞掉
 ```
 #####错误情况
 * -101，信息不存在
-- - - -
 
-####1.10 addBuilder()<a id="user_addBuilder"></a>
+
+#### addBuilder
 增加空闲builder 个数 一次增加1
 ####传入参数
 
@@ -277,9 +273,9 @@ ps:金币库存已满 金币就会被系统吞掉
 ```
 ####错误情况
 * -101，信息不存在
-- - - -
 
-####1.11 deductBuilder()<a id="user_deductBuilder"></a>
+
+### deductBuilder
 减少空闲builder 个数 一次减1
 ####传入参数
 
@@ -302,14 +298,14 @@ ps:金币库存已满 金币就会被系统吞掉
 #####错误情况
 * -101,信息不存在
 * -107，空闲builder 不足
-- - - -
+
 
 
 
 建筑模块 architecture
 ----------------------
 
-### 2.1 listArchConfig<a id="architecture_listArchConfig"></a>
+### listArchConfig
 查询所有建筑id列表。
 ####传入参数
 ```
@@ -336,7 +332,7 @@ ps:金币库存已满 金币就会被系统吞掉
 }
 ```
 
-### 2.2 getArchConfig<a id="architecture_getArchConfig"></a>
+### getArchConfig
 查询建筑配置。  
 可以按id查询所有级别的建筑配置，或者指定id和level查询建筑配置。
 ####传入参数
@@ -437,7 +433,7 @@ ps:金币库存已满 金币就会被系统吞掉
 ####异常情况
 * -301 没有指定的建筑配置（传入的id或level找不到）
 
-### 2.3 getUserArch<a id="architecture_getUserArch"></a>
+### getUserArch
 列出用户所有建筑。  
 还可以传入id或index，查询用户指定的建筑。  
 ####传入参数
@@ -512,7 +508,7 @@ ps:金币库存已满 金币就会被系统吞掉
 ####异常情况
 * -302 没有指定的建筑（传入的index找不到）
 
-###2.4 canBuild<a id="architecture_canBuild"></a>
+### canBuild
 查询是否满足建造/升级的条件。
 返回结果中包含哪些条件满足，哪些条件不满足。
 ####传入参数
@@ -556,7 +552,7 @@ ps:金币库存已满 金币就会被系统吞掉
 ####异常情况
 * -302 没有指定的建筑（传入的index找不到）
 
-### 2.5 buildArch<a id="architecture_buildArch"></a>
+### buildArch
 建造/升级建筑。  
 根据传入index来确定是建造新建筑还是升级已有建筑。建造/升级建筑会减去金币、Mr.O的建造技能数，并且需要等待时间完成。
 ####传入参数
@@ -582,7 +578,7 @@ ps:金币库存已满 金币就会被系统吞掉
 * -305 无法建造，Mr.O没有足够的空闲技能数
 * -306 无法建造，因为正在建造中
 
-### 2.6 buildFinishDelegate<a id="architecture_buildFinishDelegate"></a>
+### buildFinishDelegate
 建造/升级建筑完成的处理。注册到定时器中，当时间到时触发执行。
 ####传入参数
 ```
@@ -604,9 +600,9 @@ ps:金币库存已满 金币就会被系统吞掉
     "pos":{"x":100, "y":200}
 }
 ```
-- - - -
 
-#### 2.7 finishByGems<a id="architecture_finishByGems"></a>
+
+#### finishByGems
 宝石快速完成建造/升级
 #####传入参数
 ```
@@ -634,10 +630,10 @@ ps:金币库存已满 金币就会被系统吞掉
     "gems":123
 }
 ```
-- - - -
 
 
-#### 2.8 getStatus <a id="architecture_getStatus"></a>
+
+#### getStatus
 查询建筑状态
 #####传入参数
 ```
@@ -671,7 +667,7 @@ ps:金币库存已满 金币就会被系统吞掉
 英雄模块 hero
 ----------------------
 
-###3.1、getHeroConfig<a id="hero_getHeroConfig"></a>
+### getHeroConfig
 #####接口说明：得到英雄的配置信息
 #####传入参数说明：
 ```
@@ -731,9 +727,9 @@ ps:金币库存已满 金币就会被系统吞掉
 * 无效的英雄id
 * 无效的等级
 ```
-- - - -
 
-###3.2、add<a id="hero_add"></a>
+
+### add
 #####接口说明：召唤新的英雄
 #####传入参数说明：
 ```
@@ -773,9 +769,9 @@ ps:金币库存已满 金币就会被系统吞掉
 
 
 ```
-- - - -
 
-###3.3、addAtOnce<a id="hero_addAtOnce"></a>
+
+### addAtOnce
 #####接口说明：使用宝石使新的英雄立即可以使用
 #####传入参数说明：
 ```
@@ -814,9 +810,9 @@ ps:金币库存已满 金币就会被系统吞掉
 }
 
 ```
-- - - -
 
-###3.4、upgrade<a id="hero_upgrade"></a>
+
+### upgrade
 #####接口说明：升级英雄
 #####传入参数说明：
 
@@ -859,9 +855,7 @@ ps:金币库存已满 金币就会被系统吞掉
 
 ```
 
-- - - -
-
-###3.5、upgradeAtOnce<a id="hero_upgradeAtOnce"></a>
+### upgradeAtOnce
 #####接口说明：使用宝石直接升级英雄
 #####传入参数说明：
 
@@ -904,9 +898,7 @@ ps:金币库存已满 金币就会被系统吞掉
 
 ```
 
-- - - -
-
-###3.6、getUserHeros<a id="hero_getUserHeros"></a>
+### getUserHeros
 #####接口说明：得到用户的英雄列表
 #####传入参数说明：
 ```
@@ -948,10 +940,8 @@ heroStatusBuilding=1--召唤中
 heroStatusUpgrading=2--升级中
 heroStatusUsing=3--使用中
 ```
-- - - -
 
-
-###3.7、attachPublicSkill<a id="hero_attachPublicSkill"></a>
+### attachPublicSkill
 #####接口说明：英雄绑定公共技能
 #####传入参数说明：
 ```
@@ -970,11 +960,11 @@ heroStatusUsing=3--使用中
 * 用户未拥有该英雄
 * 用户未拥有该技能
 ```
-- - - -
 
 
 
-###3.8、loseLife<a id="hero_loseLife"></a>
+
+### loseLife
 #####接口说明：英雄战斗过程中掉血
 #####传入参数说明：
 ```
@@ -1009,9 +999,9 @@ heroStatusUsing=3--使用中
 
 
 ```
-- - - -
 
-###3.9、setFullLives<a id="hero_setFullLives"></a>
+
+### setFullLives
 #####接口说明：直接用宝石充能时使用，设置英雄满血
 #####传入参数说明：
 ```
@@ -1049,10 +1039,7 @@ heroStatusUsing=3--使用中
 
 ```
 
-- - - -
-- - - -
-
-###3.10、canBuild<a id="hero_canBuild"></a>
+### canBuild
 #####接口说明：返回单个英雄的状态，用于界面展示时使用
 #####传入参数说明：
 ```
@@ -1092,14 +1079,12 @@ heroStatusUsing=3--使用中
 	isGold:0,		--金币是否足够
 	isConflict:0---是否冲突（英雄祭坛正在建造或者升级英雄）
 }
-
-
 ```
 
 技能模块 skills
 ----------------------
 
-#### 4.00 initDb <a id ="skills_initDb"></a>
+### initDb
 内部使用，初始化技能
 ####传入参数
 ```
@@ -1115,7 +1100,7 @@ heroStatusUsing=3--使用中
 ```
 
 
-####4.01 getSkillInstituteInfo(params)<a id="skills_getSkillInstituteInfo"></a>
+### getSkillInstituteInfo
 获取技能研究所信息
 ####传入参数
 ```
@@ -1161,9 +1146,9 @@ heroStatusUsing=3--使用中
 * -101，参数错误
 * -102，信息不存在
 
-- - - -
 
-#####4.02 getConfig(params)<a id="skills_getConfig"></a>
+
+### getConfig
 获取技能信息 
 ####传入参数
 ```
@@ -1187,10 +1172,10 @@ heroStatusUsing=3--使用中
 * -101,信息不存在
 * -102,参数错误
 
-- - - - 
+ 
 
 
-####4.03 getSkillsList(params)<a id="skills_getSkillInfo"></a>
+### getSkillsList
 获取技能等级信息 可以都不传入参数 
 ####传入参数
 ```
@@ -1231,9 +1216,9 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101，参数错误
 * -102，信息不存在
 
-- - - -
 
-####4.04 getStatus(params)<a id="skills_getStatus"></a>
+
+### getStatus
 获取技能状态
 ####传入参数
 ```
@@ -1263,9 +1248,9 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101，参数错误
 * -102，信息不存在
 
-- - - -
 
-####4.05 research(params)<a id="skills_research"></a>
+
+### research
 技能学习或升级
 ####传入参数
 ```
@@ -1292,10 +1277,10 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101，参数错误
 * -102，信息不存在
 
-- - - -
 
 
-####4.06 skillIsFinished(params)<a id="skills_skillIsFinished"></a>
+
+### skillIsFinished
 完成回调
 ####传入参数
 ```
@@ -1318,9 +1303,9 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101，参数错误
 
 
-- - - -
 
-####4.07 finishByGems(params)<a id="skills_upgrade"></a>
+
+### finishByGems
 升级技能  
 ####参数传入
 ```
@@ -1346,10 +1331,10 @@ ps:当id 为 nil 时 返回所有技能信息
 * -106，等级不足
 * -104，宝石不足
 * -112，建筑正忙
-- - - -
 
 
-####4.09 addFinishedTime(params)<a id="skills_addFinishedTime"></a>
+
+### addFinishedTime
 技能研究所升级时 调用 增加研究或升级的完成时间 
 ####参数传入
 ```
@@ -1373,9 +1358,9 @@ ps:当id 为 nil 时 返回所有技能信息
 #####错误情况
 * -101,参数错误
 
-- - - -
 
-####4.10 hasAction(params)<a id="skills_hasAction"></a>
+
+### hasAction
 判断技能研究所是否在研究或升级
 
 ####传入参数
@@ -1396,9 +1381,9 @@ ps:当id 为 nil 时 返回所有技能信息
 }
 
 ```
-- - - - 
+ 
 
-####4.11 addSkillNum(params)<a id="skills_addSkillNum"></a>
+### addSkillNum
 增加技能容量个数
 
 ####传入参数
@@ -1423,10 +1408,10 @@ ps:当id 为 nil 时 返回所有技能信息
 #####错误情况
 * -101,参数不正确
 * -102,没有技能技能信息
-- - - -
 
 
-####4.12 deductSkillNum(params)<a id="skills_deductSkillNum"></a>
+
+### deductSkillNum
 减少技能容量个数
 
 ####传入参数
@@ -1452,9 +1437,9 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101,参数不正确
 * -102,没有技能技能信息
 * -502，技能数不足
-- - - -
 
-####4.13 finishByGems(params)<a id="skills_finishByGems"></a>
+
+### finishByGems
 宝石升级消除时间
 ####传入参数
 
@@ -1481,7 +1466,7 @@ ps:当id 为 nil 时 返回所有技能信息
 防御建筑模块 defense
 ----------------------
 
-####5.1 getDefenseInfo()<a id="defenseBuild_getDefenseInfo"></a>
+### getDefenseInfo
 获取防御建筑的Id的列表 data 的索引即是Id
 ####传入参数
 ```
@@ -1511,7 +1496,7 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 
-####5.2 getDefenseBuildInfo(params)<a id="defenseBuild_getDefenseBuildInfo"></a>
+### getDefenseBuildInfo
 获取所有建筑或指定建筑的信息
 ####传入参数
 ```
@@ -1546,7 +1531,7 @@ ps:当id 为 nil 时 返回所有技能信息
 ```
 
 
-####5.3 getStatus(params)<a id="defenseBuild_getStatus"></a>
+### getStatus
 查询当前防御建筑状态 返回当前剩余时间 总时间 完成时间 和结束完成的所需要宝石
 ####传入参数
 ```
@@ -1572,8 +1557,7 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 
-- - - -
-####5.4 canBuild(params)<a id="defenseBuild_canBuild"></a>
+### canBuild
 查询当前建筑是否能升级或建造 或购买  还差多少钱等等
 ####传入参数
 
@@ -1610,7 +1594,7 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 
-####5.4 build(params)<a id="defenseBuild_build"></a>
+### build
 防御建筑的建造 或 升级
 ####传入参数
 
@@ -1640,9 +1624,8 @@ ps:当id 为 nil 时 返回所有技能信息
 ####错误情况
 * -101 参数错误
 * -102 信息不存在
-- - - -
 
-####5.5 isFinished(params)<a id="defenseBuild_isFinished"></a>
+### isFinished
 建造完成回调
 
 ####传入参数
@@ -1662,11 +1645,11 @@ index --
 }
 
 ```
-- - - -
 
 
 
-####5.6 finishByGems(params)<a id="defenseBuild_finishByGems"></a>
+
+### finishByGems
 用宝石加速
 ####传入参数
 ```
@@ -1690,12 +1673,10 @@ index --
 
 ```
 
-- - - -
-
-
 资源模块 resource
+------------------
 
-####6.1 setUserGoldmine(params)<a id="goldmine_setUserGoldmine"></a>
+### setUserGoldmine
 金矿建造或升级完成时 调用 保存玩家金矿功能信息
 
 ####传入参数
@@ -1714,10 +1695,7 @@ index --
 
 ```
 
-
-
-
-####6.2 getGoldmineInfo(params)<a id="goldmine_getGoldmineInfo"></a>
+### getGoldmineInfo
 获取对应等级或全部等级的金矿功能信息
 
 ####传入参数
@@ -1755,9 +1733,7 @@ index --
 ####错误情况
 * 对应等级信息不存在
 
-- - - -
-
-####6.3 getUserGoldmineInfo(params)<a id="goldmine_getUserGoldmineInfo"></a>
+### getUserGoldmineInfo
 得到玩家金矿信息
 
 ####传入参数
@@ -1784,9 +1760,8 @@ index --
 }
 
 ```
-- - - -
 
-####6.4 produce(params)<a id="goldmine_produce"></a>
+### produce
 
 ####传入参数
 ```
@@ -1808,7 +1783,7 @@ index --
 
 ```
 
-####6.5 gather(params)<a id="goldmine_gather"></a>
+### gather
 金矿金币收取
 
 ####传入参数
@@ -1834,7 +1809,7 @@ index --
 * 没有金币产生
 
 
-####6.6 getSaveLimit(params)<a id="goldmine_getSaveLimit"></a>
+### getSaveLimit
 
 ####传入参数
 ```
@@ -1856,9 +1831,9 @@ index --
 
 ```
 
-- - - -
 
-####6.7 exchange()<a id="goldmine_exchange"></a>
+
+### exchange
 
 ####传入参数
 ```
@@ -1879,7 +1854,7 @@ index --
 杂货铺模块 grocery
 ----------------------
  
-###7.1、getCanBuy<a id="groceryStore_getCanBuy"></a>
+### getCanBuy
 #####接口说明：得到所有杂货列表
 #####传入参数说明：
 * id：杂货id or 不传
@@ -1925,9 +1900,9 @@ or
 * 获取金币失败
 * 获取宝石失败预留
 
-- - - -
 
-###7.2、buyGrocery<a id="groceryStore_buyGrocery"></a>
+
+### buyGrocery
 #####接口说明：购买杂货
 #####传入参数说明：
 * id：杂货id
@@ -1944,7 +1919,7 @@ or
 商店模块 shop
 ----------------------
 
-###8.1、getStoreItems<a id="groceryStore_getStoreItems"></a>
+### getStoreItems
 #####接口说明：得到商店商品信息
 #####传入参数说明：
 * 无
@@ -1955,9 +1930,9 @@ or
 #####错误情况：
 * 无
 
-- - - -
 
-###8.2、buyItem<a id="groceryStore_buyItem"></a>
+
+### buyItem
 #####接口说明：购买商品
 #####传入参数说明：
 * type：商品类型，1-金币，2-宝石
@@ -1969,9 +1944,7 @@ or
 #####错误情况：
 * 无效的商品名
 
-- - - -
-
-###8.3、exchangeTimeToGems<a id="groceryStore_exchangeTimeToGems"></a>
+### exchangeTimeToGems
 #####接口说明：转换时间成对应的宝石数
 #####传入参数说明：
 ```
@@ -1996,7 +1969,7 @@ or
 }
 ```
 
-###8.4 goldExchangeGem<a id="groceryStore_goldExchangeGem"></a>
+### goldExchangeGem
 用宝石兑换金币时，查询所需的宝石数。由于每个宝石都可以兑换很多金币，所以兑换后得到的金币数可能超出所需的金币数一点。
 ####传入参数
 ```
@@ -2023,7 +1996,7 @@ or
 }
 ```
 
-###8.5 gemExchangeGold<a id="groceryStore_gemExchangeGold"></a>
+### gemExchangeGold
 用宝石兑换金币，
 ####输入参数
 ```
@@ -2053,7 +2026,7 @@ or
 天梯模块 ladder
 ----------------------
 
-###9.1. findPlayer
+### findPlayer
 服务器接口，按天梯积分匹配对手。
 ####传入参数
 ```
@@ -2093,7 +2066,7 @@ or
 * 没有可匹配的玩家，请稍后再试。（只有机器人故障时出现）
 * 正在游戏的玩家太多，请稍后再试。
 
-###9.2. battleOver
+### battleOver
 服务器接口，战斗结束，上传战斗结果。  
 在一局游戏结束时，客户端发送游戏结果给服务器。如果离线玩家被击败，则离线玩家从正在被攻击的池子移动到保护池；如果离线玩家获胜，则离线玩家从正在被攻击的池子移动回离线玩家池，允许再次被分配。
 ####传入参数
@@ -2114,7 +2087,8 @@ or
     "result":true
 }
 ```
-###9.3. map_upload
+
+### map_upload
 服务器接口，按uid上传tmx地图文件。module是 map
 
 ####传入参数
@@ -2127,28 +2101,28 @@ or
 ```
 
 
-###9.4. map_download
+### map_download
 服务器接口，按uid下载tmx地图文件。module是 map
 
 
 
 
-###9.5. checkExpireProtection
+### checkExpireProtection
 服务器定时任务，把超过保护期的玩家放进离线玩家池（可被攻击）。
 
-###9.6. checkExpireBattle
+### checkExpireBattle
 服务器定时任务，把超过一局战斗游戏时间的玩家放进离线玩家池（可被攻击）。
 
-###9.7. addOfflinePlayer
+### addOfflinePlayer
 服务器定时任务，把所有从在线变成离线的玩家移进离线玩家池（可被攻击）。
 
-###9.8. delOfflinePlayer
+### delOfflinePlayer
 服务器接口，随着登录从离线玩家池中移除（不可被攻击）。
 
 进攻模块(探索塔) attack
 ----------------------
 
-####10.02 getExploreTowerInfo(params)<a id="fight_getExploreTowerInfo"></a>
+### getExploreTowerInfo
 返回探索塔信息 按等级返回 
 
 ####传入参数
@@ -2182,12 +2156,7 @@ or
 
 ```
 
-- - - -
-
-
-
-
-####10.04 attack(params)<a id="fight_attack"></a>
+### attack
 出击，保存用户选择英雄和技能
 ####传入参数
 ```
@@ -2223,12 +2192,7 @@ or
 
 ```
 
-- - - -
-
-
-
-
-####10.05 makeSkill(params)<a id="fight_makeSkill"></a>
+### makeSkill
 购买技能
 
 ####传入参数
@@ -2260,11 +2224,11 @@ or
 }
 
 ```
-- - - -
 
 
 
-#####10.06 getMakeSkillInfo() <a id ="fight_getMakeSkillInfo"></a>
+
+### getMakeSkillInfo
 获取技能充能列表
 ####传入参数
 
@@ -2391,9 +2355,7 @@ or
 
 ```
 
-----
-
-####10.06 chargedFinish(params)<a id="fight_chargedFinish"></a>
+### chargedFinish
 技能充能 完成时的回调
 
 ####传入参数
@@ -2413,10 +2375,8 @@ or
 }
 
 ```
-- - - -
 
-
-####10.07 usedSkill(params)<a id="fight_usedSkill"></a>
+### usedSkill
 战斗中使用技能，出战信息的技能个数 和 原本技能个数 都会扣
 
 ####传入参数
@@ -2437,11 +2397,11 @@ or
 }
 
 ```
-- - - -
 
 
 
-#####10.08 chargedSkillFull()<a id="fight_chargedSkillFull"></a>
+
+### chargedSkillFull
 宝石完成所有充能
 
 ####传入参数
@@ -2462,9 +2422,7 @@ or
 
 ```
 
-----
-
-####10.9 deductHeroBlood(params)<a id="fight_deductHeroBlood"></a>
+### deductHeroBlood
 英雄战斗中扣血 战斗信息 和 原本英雄的血量 都会扣
 ####传入参数
 ```
@@ -2483,10 +2441,8 @@ or
 }
 
 ```
-- - - -
 
-
-####10.10 clearUpMakeSkill(params)<a id="fight_clearUpMakeSkill"></a>
+### clearUpMakeSkill
 清除技能充能列表以及timelist
 技能升级成功时调用，用宝石充能时调用
 ####传入参数
@@ -2506,9 +2462,9 @@ or
 }
 
 ```
-- - - -
 
-####10.12 getAttackInfo()<a id="fight_getAttackInfo"></a>
+
+### getAttackInfo
 得到进攻信息
 
 ####传入参数
@@ -2544,9 +2500,9 @@ or
 }
 
 ```
-- - - -
+
 - 
-####10.13 getAttackGold()<a id="fight_getAttackGold"></a>
+### getAttackGold
 获取探索的价钱
 
 #####传入参数说明：
@@ -2564,13 +2520,8 @@ or
 }
 
 ```
------
 
-
-####10.14 battleIncome()<a id="fight_battleIncome"></a>
-战斗收益模块 待定
-
-####10.15 getAttackDefault()<a id="fight_getAttackDefault"></a>
+### getAttackDefault
 返回上一次使用的技能和英雄
 
 result["heroId"] = heroId
@@ -2598,7 +2549,7 @@ return result
 定时器模块 timerList
 ----------------------
 
-###15.1、register(params)<a id="timerlist_register"></a>
+### register
 #####接口说明：注册充能事件，相同的id，会覆盖数据
 #####传入参数说明：
 ```
@@ -2621,9 +2572,9 @@ return result
 无
 ```
 
-- - - -
 
-###15.2、cancel(params)<a id="timerlist_cancel"></a>
+
+### cancel
 #####接口说明：取消充能事件
 #####传入参数说明：
 ```
@@ -2643,8 +2594,8 @@ return result
 无
 ```
 
-- - - -
-###15.3、check()<a id="timerlist_check"></a>
+
+### check
 #####接口说明：检查充能事件，达到时间的，会触发finish操作
 #####传入参数说明：
 ```
@@ -2670,8 +2621,8 @@ return result
 无
 ```
 
-- - - -
-###15.4、local finish()<a id="timerlist_finish"></a>
+
+### finish
 #####接口说明：完成充能事件，触发回调函数，内部模块调用，对外不公开
 #####传入参数说明：
 ```
@@ -2694,7 +2645,7 @@ return result
 数据存储模块 datastore
 ----------------------
 
-### 16.1 import<a id="datastore_import"></a>
+### import
 导入用户数据。支持只导入部分字段，例如参数里只有用户的英雄数据，这个特性可以在增量同步的时候使用。
 ####传入参数
 ```
@@ -2733,7 +2684,7 @@ return result
     }
 }
 ```
-### 16.2 export<a id="datastore_export"></a>
+### export
 导出所有用户数据。
 ####传入参数
 {}
@@ -2776,7 +2727,7 @@ return result
 杂物模块 otherItems
 ----------------------
 
-###17.1、canOutPutOtherItems(params)<a id="otherItems_canOutPutOtherItems"></a>
+### canOutPutOtherItems
 #####接口说明：可以生产杂物的信息
 #####传入参数说明：
 ```
@@ -2812,9 +2763,9 @@ return result
 无
 ```
 
-- - - -
 
-###17.2、build(params)<a id="otherItems_build"></a>
+
+### build
 #####接口说明：生产杂物
 #####传入参数说明：
 ```
@@ -2839,9 +2790,9 @@ return result
 *已满
 ```
 
-- - - -
 
-###17.3、canPluck(params)<a id="otherItems_canPluck"></a>
+
+### canPluck
 #####接口说明：能否采集杂物
 #####传入参数说明：
 ```
@@ -2881,10 +2832,10 @@ return result
 *已满
 ```
 
-- - - -
 
 
-###17.4、pluck(params)<a id="otherItems_pluck"></a>
+
+### pluck
 #####接口说明：采集杂物
 #####传入参数说明：
 ```
@@ -2909,9 +2860,9 @@ return result
 *已满
 ```
 
-- - - -
 
-###17.5、isFinished(params)<a id="otherItems_isFinished"></a>
+
+### isFinished
 #####接口说明：采集杂物完成
 #####传入参数说明：
 ```
@@ -2934,9 +2885,9 @@ return result
 *已满
 ```
 
-- - - -
 
-###17.6、finishByGems(params)<a id="otherItems_finishByGems"></a>
+
+### finishByGems
 #####接口说明：用宝石采集杂物完成
 #####传入参数说明：
 ```
@@ -2964,7 +2915,7 @@ return result
 战斗模块 battle
 ----------------------
 
-### 18.1 getResult<a id="battle_getResult"></a>
+### getResult
 计算战斗结果。
 ####传入参数
 ```
@@ -3102,7 +3053,7 @@ return result
 飞船模块 battleship
 ----------------------
 
-###19.1 getStatus<a id="battleship_getStatus"></a>
+### getStatus
 查询飞船状态，包括拥有的武器。
 ####传入参数
 无
@@ -3136,7 +3087,7 @@ return result
     ]
 }
 ```
-###19.2 getConfig<a id="battleship_getConfig"></a>
+### getConfig
 查询武器配置。如果不传入武器id参数，则查询所有武器。
 ####传入数据
 ```
@@ -3184,7 +3135,7 @@ return result
 	]
 }
 ```
-###19.3 buyWeapon<a id="battleship_buyWeapon"></a>
+### buyWeapon
 购买武器。购买的顺序决定了释放的顺序。
 如果购买成功，将扣除金币，否则不扣除。
 ####传入数据
@@ -3215,7 +3166,7 @@ return result
 	"needGems":30
 }
 ```
-###19.4 useWeapon<a id="battleship_useWeapon"></a>
+### useWeapon
 使用武器。触发飞船冷却。
 ####传入参数
 ```
@@ -3232,7 +3183,7 @@ return result
 }
 ```
 
-###19.5 adjustWeaponsOrder<a id="battleship_adjustWeaponsOrder"></a>
+### adjustWeaponsOrder
 调整武器顺序。
 ###传入参数
 ```
@@ -3254,7 +3205,7 @@ return result
 }
 ```
 
-###19.6 finishNow<a id="battleship_finishNow"></a>
+### finishNow
 立即完成飞船的cooldown，并扣除宝石。
 ###传入参数
 无

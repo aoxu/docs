@@ -306,7 +306,8 @@ ps:金币库存已满 金币就会被系统吞掉
 
 
 
-<h2 id="architecture">2.建筑模块(module = architecture)</h2>
+建筑模块 architecture
+----------------------
 
 ### 2.1 listArchConfig<a id="architecture_listArchConfig"></a>
 查询所有建筑id列表。
@@ -666,12 +667,10 @@ ps:金币库存已满 金币就会被系统吞掉
     "totalTime":12345
 }
 ```
-- - - -
 
+英雄模块 hero
+----------------------
 
-
-<h2 id="hero">3.英雄模块(module=hero)</h2>
- 
 ###3.1、getHeroConfig<a id="hero_getHeroConfig"></a>
 #####接口说明：得到英雄的配置信息
 #####传入参数说明：
@@ -1097,12 +1096,8 @@ heroStatusUsing=3--使用中
 
 ```
 
-- - - -
-
-
-<h2 id="skill">4.技能模块(module=skills)</h2>
-
-
+技能模块 skills
+----------------------
 
 #### 4.00 initDb <a id ="skills_initDb"></a>
 内部使用，初始化技能
@@ -1482,10 +1477,10 @@ ps:当id 为 nil 时 返回所有技能信息
 * -101，参数不正确
 * -102，没有技能技能信息
 * -104，宝石不足
-- - - -
 
+防御建筑模块 defense
+----------------------
 
-###<h2 id="defenseBuild">5.防御建筑模块(module=defenseBuild)</h2>
 ####5.1 getDefenseInfo()<a id="defenseBuild_getDefenseInfo"></a>
 获取防御建筑的Id的列表 data 的索引即是Id
 ####传入参数
@@ -1698,7 +1693,7 @@ index --
 - - - -
 
 
-<h2 id="goldmine">6.金矿模块(module=goldmineManager)</h2>
+资源模块 resource
 
 ####6.1 setUserGoldmine(params)<a id="goldmine_setUserGoldmine"></a>
 金矿建造或升级完成时 调用 保存玩家金矿功能信息
@@ -1881,10 +1876,8 @@ index --
 
 ```
 
-- - - -
-
-<h2 id="groceryStore">7.杂货铺模块</h2>
---
+杂货铺模块 grocery
+----------------------
  
 ###7.1、getCanBuy<a id="groceryStore_getCanBuy"></a>
 #####接口说明：得到所有杂货列表
@@ -1948,10 +1941,8 @@ or
 * 杂货部等级部足
 * 金币不够
 
-- - - -
-
-
-<h2 id="gameStore">8.商店模块(mod=gameStore)</h2>
+商店模块 shop
+----------------------
 
 ###8.1、getStoreItems<a id="groceryStore_getStoreItems"></a>
 #####接口说明：得到商店商品信息
@@ -2059,9 +2050,8 @@ or
 }
 ```
 
-- - - -
-<h2 id="ladder">9.天梯模块</h2>
---
+天梯模块 ladder
+----------------------
 
 ###9.1. findPlayer
 服务器接口，按天梯积分匹配对手。
@@ -2606,31 +2596,8 @@ return result
 
 ```
 
-<h2 id="AI">11.AI模块</h2>
-
-
-##待定
-- - -  -
-
-<h2 id="stat">12.游戏统计模块</h2>
-
-
-##待定
-- - -  -
-
-<h2 id="rank">13.排行榜模块</h2>
-
-
-##待定
-- - -  -
-
-<h2 id="achievement">14.成就模块</h2>
-
-
-##待定
-- - - -
-
-<h2 id="timerList">15.定时器模块(module = timerList)</h2>
+定时器模块 timerList
+----------------------
 
 ###15.1、register(params)<a id="timerlist_register"></a>
 #####接口说明：注册充能事件，相同的id，会覆盖数据
@@ -2725,10 +2692,8 @@ return result
 无
 ```
 
-- - - -
-
-
-<h2 id="architecture">16.数据存储模块(module = datastore)</h2>
+数据存储模块 datastore
+----------------------
 
 ### 16.1 import<a id="datastore_import"></a>
 导入用户数据。支持只导入部分字段，例如参数里只有用户的英雄数据，这个特性可以在增量同步的时候使用。
@@ -2809,9 +2774,8 @@ return result
 }
 ```
 
------
-
-<h2 id="otherItems">17.杂物模块(module = otherItems)</h2>
+杂物模块 otherItems
+----------------------
 
 ###17.1、canOutPutOtherItems(params)<a id="otherItems_canOutPutOtherItems"></a>
 #####接口说明：可以生产杂物的信息
@@ -2998,9 +2962,8 @@ return result
 *已满
 ```
 
-- - - -
-
-<h2 id="battle">18.战斗模块(module = battle)</h2>
+战斗模块 battle
+----------------------
 
 ### 18.1 getResult<a id="battle_getResult"></a>
 计算战斗结果。
@@ -3130,7 +3093,9 @@ return result
 }
 ```
 
-<h2 id="battleship">19.飞船模块(module = battleship)</h2>
+飞船模块 battleship
+----------------------
+
 ###19.1 getStatus<a id="battleship_getStatus"></a>
 查询飞船状态，包括拥有的武器。
 ####传入参数

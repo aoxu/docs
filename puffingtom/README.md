@@ -1,7 +1,7 @@
-Star Legend To Lua 逻辑API
+Star Legend Lua API
 ======================
 
-1.用户模块 user
+用户模块 user
 ----------------------
 
 ####1.01 login(params)<a id="user_login"></a>
@@ -11,7 +11,6 @@ Star Legend To Lua 逻辑API
 
 ```
 待定
- 
 ```
 
 ######返回信息：  
@@ -3041,6 +3040,93 @@ return result
 	"destroyRate":50,
 	"score":7,
 	"stars":1
+}
+```
+
+### getLootResource
+计算战斗资源收益。传入的是对方的建筑和资源数据，其中建筑数据是datastore中的原样数据，而资源数据经过了加工处理，服务器计算了当前时刻的产量，客户端计算了掠夺走的数量。返回出来的是服务器可以直接拿去覆盖掉的数据，不需要任何处理。
+####传入参数
+```json
+{
+    "architecture":"建筑模块的用户数据",
+    "resource":{
+        "gold":{
+            "collector":[
+                {
+                    "index":1,
+                    "currentCount":"服务器返回的当前产量",
+                    "lootCount":"被抢走的量"
+                },
+                ...
+            ],
+            "storage":[
+                {
+                    "index":1,
+                    "currentCount":"当前存储量",
+                    "lootCount":"被抢走的量"
+                },
+                ...
+            ]
+        },
+        "hydrogen":{
+            "collector":[
+                {
+                    "index":1,
+                    "currentCount":"服务器返回的当前产量",
+                    "lootCount":"被抢走的量"
+                },
+                ...
+            ],
+            "storage":[
+                {
+                    "index":1,
+                    "currentCount":"当前存储量",
+                    "lootCount":"被抢走的量"
+                },
+                ...
+            ]
+        },
+    },
+}
+```
+####传出参数
+```json
+{
+    "architecture":"建筑模块的用户数据",
+    "resource":{
+        "gold":{
+            "collector":[
+                {
+                    "index":1,
+                    "finishedMoment":"产满的完成时刻",
+                },
+                ...
+            ],
+            "storage":[
+                {
+                    "index":1,
+                    "currentCount":"当前存储量"
+                },
+                ...
+            ]
+        },
+        "hydrogen":{
+            "collector":[
+                {
+                    "index":1,
+                    "finishedMoment":"产满的完成时刻",
+                },
+                ...
+            ],
+            "storage":[
+                {
+                    "index":1,
+                    "currentCount":"当前存储量",
+                },
+                ...
+            ]
+        },
+    },
 }
 ```
 

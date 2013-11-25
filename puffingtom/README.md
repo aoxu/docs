@@ -2144,10 +2144,9 @@ or
 
 ###9.8. delOfflinePlayer
 服务器接口，随着登录从离线玩家池中移除（不可被攻击）。
-- - -  -
 
-<h2 id="fight">10.战斗模块(探索塔)(module=exploreTower)</h2>
-
+进攻模块(探索塔) attack
+----------------------
 
 ####10.02 getExploreTowerInfo(params)<a id="fight_getExploreTowerInfo"></a>
 返回探索塔信息 按等级返回 

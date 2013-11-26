@@ -7,22 +7,17 @@ Star Legend Lua API
 ### login
 用户登录 同步数据，和数据初始化  
 
-####传入参数  
-
+**传入参数** 
 ```
 待定
 ```
-
-######返回信息：  
+**返回信息**
 ```
 {"ret":0,"errMsg":""}
 ```
-##### 错误情况
+**错误情况**
 
 * -101,参数错误
-
-
-- - -
 
 ### getUserInfo
 获取客户端用户信息  
@@ -447,16 +442,16 @@ ps:金币库存已满 金币就会被系统吞掉
 ```
 {
     "1":{
-		"id":"建筑id",
-		"1":{
-			"index":"同类建筑编号",
-			"level":"建筑级别",
-			"pos":{ "x":"x座标", "y":"y座标" },
-			"finishedTime":"完成时刻",
-			"isBuilding":"是否正在建造/升级",
-			"remainingTime":"建造/升级剩余时间"
-		} -- 根据index的不同，可能有多个
-	} -- 根据id的不同，可能有多个
+        "id":"建筑id",
+        "1":{
+            "index":"同类建筑编号",
+            "level":"建筑级别",
+            "pos":{ "x":"x座标", "y":"y座标" },
+            "finishedTime":"完成时刻",
+            "isBuilding":"是否正在建造/升级",
+            "remainingTime":"建造/升级剩余时间"
+        } -- 根据index的不同，可能有多个
+    } -- 根据id的不同，可能有多个
 }
 ```
 ####示例传入数据
@@ -470,39 +465,39 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数为空的情况
 ```
 {
-	"1":{
-		"id":1,
-		"1":{
-			"index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
-		}
-	},
-	"2":{
-		"id":2,
-		"1":{
-			"index":1, "level":1, "pos":{ "x":150, "y":150 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-		},
-		"2":{
-			"index":2, "level":1, "pos":{ "x":200, "y":200 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-		},
-		"3":{
-			"index":3, "level":1, "pos":{ "x":300, "y":300 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-		}
-	}
+    "1":{
+        "id":1,
+        "1":{
+            "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
+        }
+    },
+    "2":{
+        "id":2,
+        "1":{
+            "index":1, "level":1, "pos":{ "x":150, "y":150 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
+        },
+        "2":{
+            "index":2, "level":1, "pos":{ "x":200, "y":200 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
+        },
+        "3":{
+            "index":3, "level":1, "pos":{ "x":300, "y":300 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
+        }
+    }
 }
 ```
 #####传入id的情况
 ```
 {
-	"id":1,
-	"1":{
-		"index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
-	}
+    "id":1,
+    "1":{
+        "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
+    }
 }
 ```
 #####传入id和index的情况
 ```
 {
-	"index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
+    "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
 }
 ```
 ####异常情况
@@ -607,14 +602,14 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数
 ```
 {
-	"id":"建筑id",
-	"index":"同类建筑编号" 
+    "id":"建筑id",
+    "index":"同类建筑编号" 
 }
 ```
 #####返回参数：
 ```
 {
-	"gems":"消费宝石数"
+    "gems":"消费宝石数"
 }
 ```
 #####传入数据示例
@@ -638,15 +633,15 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数
 ```
 {
-	"id":"建筑 id",
-	"index":"同类建筑编号" 
+    "id":"建筑 id",
+    "index":"同类建筑编号" 
 }
 ```
 #####返回参数
 ```
 {
-	"remainingTime":"剩余时间",
-	"totalTime":"建造/升级总时间",
+    "remainingTime":"剩余时间",
+    "totalTime":"建造/升级总时间",
 }
 ```
 #####示例传入数据
@@ -672,52 +667,52 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数说明：
 ```
 {
-	heroId --英雄id
-	level  --英雄等级，可选
+    heroId --英雄id
+    level  --英雄等级，可选
 }
 ```
 #####返回参数：
 ```
 * heroList:英雄等级配置列表
 {
-	"ret":0, 				--返回值，判断是否拉取到
-	"heroName":"MR.Q",		--英雄名称
-	"maxLevel": 5			--最大等级
-	"levels":				--英雄等级配置数据
-	{
-	"heroAltarLevel":1,		--依赖英雄塔
-	"jumpHeight":2, 		--弹跳高度
-	"lifeSpeed":60,			--生命恢复速度
-	"price":10,				--当前等级购买价格
-	"jumpWidth":5,			--弹跳宽度
-	"lives":5,				--最高生命值
-	"waitingTime":60,		--升级等待时间
-	"speed":6,				--英雄运动速度
-	"level":1,				--等级
-	"id":1				--专属技能
-	}
+    "ret":0,                --返回值，判断是否拉取到
+    "heroName":"MR.Q",      --英雄名称
+    "maxLevel": 5           --最大等级
+    "levels":               --英雄等级配置数据
+    {
+    "heroAltarLevel":1,     --依赖英雄塔
+    "jumpHeight":2,         --弹跳高度
+    "lifeSpeed":60,         --生命恢复速度
+    "price":10,             --当前等级购买价格
+    "jumpWidth":5,          --弹跳宽度
+    "lives":5,              --最高生命值
+    "waitingTime":60,       --升级等待时间
+    "speed":6,              --英雄运动速度
+    "level":1,              --等级
+    "id":1              --专属技能
+    }
 }
 ```
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"heroName":"MR.Q",
-	"maxLevel":5,
-	"levels":
-	{
-	"heroAltarLevel":1,
-	"jumpHeight":2,
-	"lifeSpeed":60,
-	"price":10,
-	"jumpWidth":5,
-	"lives":5,
-	"waitingTime":60,
-	"speed":6,
-	"level":1,
-	"id":1
-	}
+    "ret":0,
+    "errMsg":"",
+    "heroName":"MR.Q",
+    "maxLevel":5,
+    "levels":
+    {
+    "heroAltarLevel":1,
+    "jumpHeight":2,
+    "lifeSpeed":60,
+    "price":10,
+    "jumpWidth":5,
+    "lives":5,
+    "waitingTime":60,
+    "speed":6,
+    "level":1,
+    "id":1
+    }
 }
 
 ```
@@ -734,14 +729,14 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数说明：
 ```
 {
-	heroId --英雄id
+    heroId --英雄id
 }
 ```
 
 #####返回参数：
 ```
 {
-	ret --是否召唤成功
+    ret --是否召唤成功
 }
 ```
 #####错误情况：
@@ -754,17 +749,17 @@ ps:金币库存已满 金币就会被系统吞掉
 ####示例返回数据
 ```
 {
-	"ret":0, 
-	"errMsg":"",
-	"hero":
-	{
-		"startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-		"unlockedMoment":1369812987,
-		"status":1,
-		"heroId":2,
-		"lives":0,
-		"level":0
-	}
+    "ret":0, 
+    "errMsg":"",
+    "hero":
+    {
+        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
+        "unlockedMoment":1369812987,
+        "status":1,
+        "heroId":2,
+        "lives":0,
+        "level":0
+    }
 }
 
 
@@ -776,14 +771,14 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数说明：
 ```
 {
-	heroId --英雄id
+    heroId --英雄id
 }
 ```
 
 #####返回参数：
 ```
 {
-	ret --是否召唤成功
+    ret --是否召唤成功
 }
 ```
 #####错误情况：
@@ -796,17 +791,17 @@ ps:金币库存已满 金币就会被系统吞掉
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"gem":20,
-	"hero":
-	{
-		"unlockedMoment":0,
-		"status":3,
-		"heroId":2,
-		"lives":5,
-		"level":1
-	}
+    "ret":0,
+    "errMsg":"",
+    "gem":20,
+    "hero":
+    {
+        "unlockedMoment":0,
+        "status":3,
+        "heroId":2,
+        "lives":5,
+        "level":1
+    }
 }
 
 ```
@@ -818,39 +813,39 @@ ps:金币库存已满 金币就会被系统吞掉
 
 ```
 {
-	heroId --英雄id
+    heroId --英雄id
 }
 ```
 
 #####返回参数：
 ```
 {
-	ret --是否升级成功
+    ret --是否升级成功
 }
 ```
 #####错误情况：
 ```
 {
-	* 无效的英雄id
-	* 已经最高等级
-	* 英雄塔级别不够
-	* 金币不够
+    * 无效的英雄id
+    * 已经最高等级
+    * 英雄塔级别不够
+    * 金币不够
 }
 ```
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"hero":
-	{
-		"startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-		"unlockedMoment":1369813683,
-		"status":2,
-		"heroId":2,
-		"lives":5,
-		"level":1
-	}
+    "ret":0,
+    "errMsg":"",
+    "hero":
+    {
+        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
+        "unlockedMoment":1369813683,
+        "status":2,
+        "heroId":2,
+        "lives":5,
+        "level":1
+    }
 }
 
 ```
@@ -861,39 +856,39 @@ ps:金币库存已满 金币就会被系统吞掉
 
 ```
 {
-	heroId --英雄id
+    heroId --英雄id
 }
 ```
 
 #####返回参数：
 ```
 {
-	ret --是否升级成功
+    ret --是否升级成功
 }
 ```
 #####错误情况：
 ```
 {
-	* 无效的英雄id
-	* 已经最高等级
-	* 英雄塔级别不够
-	* 金币不够
+    * 无效的英雄id
+    * 已经最高等级
+    * 英雄塔级别不够
+    * 金币不够
 }
 ```
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"gem":20,
-	"hero":
-	{
-		"heroId":2,
-		"level":2,
-		"lives":5,
-		"unlockedMoment":0,
-		"status":3
-	}
+    "ret":0,
+    "errMsg":"",
+    "gem":20,
+    "hero":
+    {
+        "heroId":2,
+        "level":2,
+        "lives":5,
+        "unlockedMoment":0,
+        "status":3
+    }
 }
 
 ```
@@ -903,7 +898,7 @@ ps:金币库存已满 金币就会被系统吞掉
 #####传入参数说明：
 ```
 {
-	heroId --可选参数，不传则返回所有
+    heroId --可选参数，不传则返回所有
 }
 ```
 
@@ -919,20 +914,20 @@ ps:金币库存已满 金币就会被系统吞掉
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"heroList":
-	[{
-		"startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-		"unlockedMoment":1,
-		"totalTime":600,--总的建造时间
-		"remainingTime":600,--剩余时间
-		"status":1,
-		"heroId":2,
-		"lives":5,
-		"level":2,
-		"heroName":"Mr.Q"
-	}]
+    "ret":0,
+    "errMsg":"",
+    "heroList":
+    [{
+        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
+        "unlockedMoment":1,
+        "totalTime":600,--总的建造时间
+        "remainingTime":600,--剩余时间
+        "status":1,
+        "heroId":2,
+        "lives":5,
+        "level":2,
+        "heroName":"Mr.Q"
+    }]
 }
 状态说明：
 heroStatusUnbuild=0 --未召唤
@@ -984,17 +979,17 @@ heroStatusUsing=3--使用中
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	"hero":
-	{
-		"lifeAddedMoment":1369817925,
-		"heroId":2,
-		"unlockedMoment":0,
-		"status":3,
-		"level":2,
-		"lives":4
-	}
+    "ret":0,
+    "errMsg":"",
+    "hero":
+    {
+        "lifeAddedMoment":1369817925,
+        "heroId":2,
+        "unlockedMoment":0,
+        "status":3,
+        "level":2,
+        "lives":4
+    }
 }
 
 
@@ -1022,18 +1017,18 @@ heroStatusUsing=3--使用中
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"gem":20,
-	"errMsg":"",
-	"hero":
-	{
-		"lifeAddedMoment":0,
-		"level":2,
-		"unlockedMoment":0,
-		"status":3,
-		"heroId":2,
-		"lives":5
-	}
+    "ret":0,
+    "gem":20,
+    "errMsg":"",
+    "hero":
+    {
+        "lifeAddedMoment":0,
+        "level":2,
+        "unlockedMoment":0,
+        "status":3,
+        "heroId":2,
+        "lives":5
+    }
 }
 
 
@@ -1053,13 +1048,13 @@ heroStatusUsing=3--使用中
         result.isGold = false
         result.isConflict = false
 {
-	ret, --是否升级成功
-	errMsg,
-	canBuild, --是否可以建造或者升级
-	isBuilding,--是否正在建造或者升级
-	isDependArch, --是否受英雄祭坛限制
-	isGold,		--金币是否足够
-	isConflict---是否冲突（英雄祭坛正在建造或者升级英雄）
+    ret, --是否升级成功
+    errMsg,
+    canBuild, --是否可以建造或者升级
+    isBuilding,--是否正在建造或者升级
+    isDependArch, --是否受英雄祭坛限制
+    isGold,     --金币是否足够
+    isConflict---是否冲突（英雄祭坛正在建造或者升级英雄）
 }
 ```
 
@@ -1071,13 +1066,13 @@ heroStatusUsing=3--使用中
 ####示例返回数据
 ```
 {
-	"ret":0,
-	"errMsg":"",
-	canBuild:0, --是否可以建造或者升级
-	isBuilding:0,--是否正在建造或者升级
-	isDependArch:0, --是否受英雄祭坛限制
-	isGold:0,		--金币是否足够
-	isConflict:0---是否冲突（英雄祭坛正在建造或者升级英雄）
+    "ret":0,
+    "errMsg":"",
+    canBuild:0, --是否可以建造或者升级
+    isBuilding:0,--是否正在建造或者升级
+    isDependArch:0, --是否受英雄祭坛限制
+    isGold:0,       --金币是否足够
+    isConflict:0---是否冲突（英雄祭坛正在建造或者升级英雄）
 }
 ```
 
@@ -1116,29 +1111,29 @@ heroStatusUsing=3--使用中
 {
     "ret": 0,
     "errMsg": "",
-   	"data":{
-   	"id":1
-   	"maxLevel":
-   	"maxNumber": --可拥有数
-   	"nameEn":
-   	}
+    "data":{
+    "id":1
+    "maxLevel":
+    "maxNumber": --可拥有数
+    "nameEn":
+    }
     不传入level
      "ret": 0,
     "errMsg": "",
-   	"data":{
-   	 [1]:{
-   	 	"id":1
-   		"maxLevel":
-   		"maxNumber": --可拥有数
-   		"nameEn":
-   	 }
-   	 [2]:{
-   		"id":1
-   		"maxLevel":
-   		"maxNumber": --可拥有数
-   		"nameEn":
-   	 }
-   	}
+    "data":{
+     [1]:{
+        "id":1
+        "maxLevel":
+        "maxNumber": --可拥有数
+        "nameEn":
+     }
+     [2]:{
+        "id":1
+        "maxLevel":
+        "maxNumber": --可拥有数
+        "nameEn":
+     }
+    }
 }
 
 ```
@@ -1192,21 +1187,21 @@ heroStatusUsing=3--使用中
 {
     "errMsg": "",
     "data": 
-    	tmp["id"]	= 0 -- id
-		tmp["nameEn"]	= 0 -- 名称
-		tmp["maxLevel"] = 0 -- 最大等级
-		tmp["attribute"] = 0 -- 技能详细信息
-		tmp["rechargeTime"] = 0 --充能时间
-		tmp["maxCapacity"] = 0 --最大拥有个数
-		tmp["hasSeveral"] = 0 --已有个数
-		tmp["chargedTime"] = 0 --充能时间
-		tmp["buyNeedGold"] = 0 --单个购买充能价格
-		tmp["finishedTime"] = 0 --完成时间
-		tmp["needGold"] = 0 --金币不足时返回的差额
-		tmp["needGem"] = 0 --差额兑换的宝石数
-		tmp["level"]=0, --等级
-		tmp["isGold"] true or false
-		tmp["isResearching"] true or false
+        tmp["id"]   = 0 -- id
+        tmp["nameEn"]   = 0 -- 名称
+        tmp["maxLevel"] = 0 -- 最大等级
+        tmp["attribute"] = 0 -- 技能详细信息
+        tmp["rechargeTime"] = 0 --充能时间
+        tmp["maxCapacity"] = 0 --最大拥有个数
+        tmp["hasSeveral"] = 0 --已有个数
+        tmp["chargedTime"] = 0 --充能时间
+        tmp["buyNeedGold"] = 0 --单个购买充能价格
+        tmp["finishedTime"] = 0 --完成时间
+        tmp["needGold"] = 0 --金币不足时返回的差额
+        tmp["needGem"] = 0 --差额兑换的宝石数
+        tmp["level"]=0, --等级
+        tmp["isGold"] true or false
+        tmp["isResearching"] true or false
     "ret": 0
 }
 ps:当id 为 nil 时 返回所有技能信息
@@ -1375,9 +1370,9 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 {
-	“ret”:0,
-	"action":0, -- or 1
-	"errmMsg": "",
+    “ret”:0,
+    "action":0, -- or 1
+    "errmMsg": "",
 }
 
 ```
@@ -1471,7 +1466,7 @@ ps:当id 为 nil 时 返回所有技能信息
 ####传入参数
 ```
 {
-	level - 防御部等级 
+    level - 防御部等级 
 }
 ```
 ######返回信息：
@@ -1563,8 +1558,8 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 {
-	id = id 防御建筑id
-	index = index 传入index 就是查询当前已有的 没有的可以不穿 默认返回1级的配置信息
+    id = id 防御建筑id
+    index = index 传入index 就是查询当前已有的 没有的可以不穿 默认返回1级的配置信息
 }
 ```
 ######返回信息：
@@ -1600,21 +1595,21 @@ ps:当id 为 nil 时 返回所有技能信息
 
 ```
 {
-	id = id 防御建筑id
-	index = index 传入index就是升级
+    id = id 防御建筑id
+    index = index 传入index就是升级
 }
 ```
 ######返回信息：
 
 ```
 {
-	"ret":0,
-	"errMsg":"xx",
-	"usedGold":222, --花费金币
-	"totalTime":2222, -- 总时间
-	"index":1, --index
-	"finishedTime":1111 -- 完成时间 
-	
+    "ret":0,
+    "errMsg":"xx",
+    "usedGold":222, --花费金币
+    "totalTime":2222, -- 总时间
+    "index":1, --index
+    "finishedTime":1111 -- 完成时间 
+    
 这里金币不足时 我也做了输出 金币还差多少 需要多少宝石去换
 }
 
@@ -1878,16 +1873,16 @@ or
 "ret":0,
 "errMsg":"",
 "data":{
-	[{
-	"id":1,
-	"name":"xxxx",
-	"canBuyNumber":4,
-	"buyNumber":2,
-	"needGold":500,
-	"isGold":true,
-	"isNumber":true,
-	"isLevel":true
-	}],
+    [{
+    "id":1,
+    "name":"xxxx",
+    "canBuyNumber":4,
+    "buyNumber":2,
+    "needGold":500,
+    "isGold":true,
+    "isNumber":true,
+    "isLevel":true
+    }],
 }
 
 }
@@ -1949,7 +1944,7 @@ or
 #####传入参数说明：
 ```
 {
-	timestamp：时间戳
+    timestamp：时间戳
 }
 ```
 #####返回参数：
@@ -1963,9 +1958,9 @@ or
 #####示例返回例子
 ```
 {
-	ret=0,
-	errMsg="",
-	gems=20,
+    ret=0,
+    errMsg="",
+    gems=20,
 }
 ```
 
@@ -1974,25 +1969,25 @@ or
 ####传入参数
 ```
 {
-	gold = "所需金币数"
+    gold = "所需金币数"
 }
 ```
 ####返回参数
 ```
 {
-	gem = "兑换消费的宝石数"
+    gem = "兑换消费的宝石数"
 }
 ```
 ####示例传入数据
 ```
 {
-	gold = 123
+    gold = 123
 }
 ```
 ####示例返回数据
 ```
 {
-	gem = 3
+    gem = 3
 }
 ```
 
@@ -2001,25 +1996,25 @@ or
 ####输入参数
 ```
 {
-	gem = "消费的宝石数"
+    gem = "消费的宝石数"
 }
 ```
 ####返回参数
 ```
 {
-	gold = "兑换出来的金币数"
+    gold = "兑换出来的金币数"
 }
 ```
 ####示例输入数据
 ```
 {
-	gem = 3
+    gem = 3
 }
 ```
 ####示例返回数据
 ```
 {
-	gold = 123
+    gold = 123
 }
 ```
 
@@ -2531,7 +2526,7 @@ return result
 #####传入参数说明：
 ```
 {
-	skillId -- 技能id
+    skillId -- 技能id
 }
 ```
 ####返回参数
@@ -2554,10 +2549,10 @@ return result
 #####传入参数说明：
 ```
 {
-	rechargeId 			--充能id
-	callback   			--回调函数
-	callbackParams 		--回调函数参数
-	timestamp			--回调触发时间点
+    rechargeId          --充能id
+    callback            --回调函数
+    callbackParams      --回调函数参数
+    timestamp           --回调触发时间点
 }
 ```
 
@@ -2579,7 +2574,7 @@ return result
 #####传入参数说明：
 ```
 {
-	rechargeId 			--充能id
+    rechargeId          --充能id
 }
 ```
 
@@ -2605,15 +2600,15 @@ return result
 
 #####返回参数：
 ```
-{	"ret":0,
-	"info":[{
-		"callback":"hero.heroAddDelegate",
-		"params":{
-			"lives":5,
-			"heroId":1
-		}
-	}],
-	"errMsg":""
+{   "ret":0,
+    "info":[{
+        "callback":"hero.heroAddDelegate",
+        "params":{
+            "lives":5,
+            "heroId":1
+        }
+    }],
+    "errMsg":""
 }
 ```
 #####错误情况：
@@ -2627,7 +2622,7 @@ return result
 #####传入参数说明：
 ```
 {
-	rechargeInfo --充能信息
+    rechargeInfo --充能信息
 }
 ```
 
@@ -2732,7 +2727,7 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  不传入可以获得所有
+    id -- 杂物Id  不传入可以获得所有
 }
 ```
 
@@ -2742,17 +2737,17 @@ return result
 "ret":0,
 "errMsg":"xxxx",
 "data":[
-	{
-	"id":1 --杂物Id
-	"name":名字
-	"maxNumber":可生产最大数
-	"list":[{
-		"id":1,--杂物Id
-		"type":1,--类型
-		}],
-		"existNumber":10,-存在个数
-		…..
-	}
+    {
+    "id":1 --杂物Id
+    "name":名字
+    "maxNumber":可生产最大数
+    "list":[{
+        "id":1,--杂物Id
+        "type":1,--类型
+        }],
+        "existNumber":10,-存在个数
+        …..
+    }
 ],
 
 }
@@ -2770,8 +2765,8 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  
-	type -- 类型
+    id -- 杂物Id  
+    type -- 类型
 }
 ```
 
@@ -2797,33 +2792,33 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  
-	index - 可传可不传
+    id -- 杂物Id  
+    index - 可传可不传
 }
 ```
 
 #####返回参数：
 ```
 {
-	"ret":0,
-	"errMsg":"xxxx",
-	"data":[
-		{
-			"id":1,--杂物Id
-			"name":xxx,--名称
-			"type":1,--种类
-			"totalTime":400,--采集所需要时间
-			"gold":200,--采集所需要金币
-			"gem":1,--得到宝石数量
-			"gemPro":55,--得到宝石概率
-			"finishTime":0--采集完成时间
-			"index":"1",---第几个杂物
-			"isGold":true, 是否够黄金采集 true 够 false 不够	
-			"isBuilder":true, --是否有足够builder
-			"remainTime":0, --剩余时间
-			"isGather":false, --- 是否在采集中
-	},
-	...]
+    "ret":0,
+    "errMsg":"xxxx",
+    "data":[
+        {
+            "id":1,--杂物Id
+            "name":xxx,--名称
+            "type":1,--种类
+            "totalTime":400,--采集所需要时间
+            "gold":200,--采集所需要金币
+            "gem":1,--得到宝石数量
+            "gemPro":55,--得到宝石概率
+            "finishTime":0--采集完成时间
+            "index":"1",---第几个杂物
+            "isGold":true, 是否够黄金采集 true 够 false 不够  
+            "isBuilder":true, --是否有足够builder
+            "remainTime":0, --剩余时间
+            "isGather":false, --- 是否在采集中
+    },
+    ...]
 }
 ```
 
@@ -2840,18 +2835,18 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  
-	index -- 杂物index 
+    id -- 杂物Id  
+    index -- 杂物index 
 }
 ```
 
 #####返回参数：
 ```
 {
-	"ret":0,
-	"errMsg":"xxxx",
-	"gold":100,
-	"totalTime":1000,
+    "ret":0,
+    "errMsg":"xxxx",
+    "gold":100,
+    "totalTime":1000,
 }
 ```
 
@@ -2867,16 +2862,16 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  
-	index -- 杂物index 
+    id -- 杂物Id  
+    index -- 杂物index 
 }
 ```
 
 #####返回参数：
 ```
 {
-	"ret":0,
-	"errMsg":"xxxx",
+    "ret":0,
+    "errMsg":"xxxx",
 }
 ```
 
@@ -2892,8 +2887,8 @@ return result
 #####传入参数说明：
 ```
 {
-	id -- 杂物Id  
-	index -- 杂物index 
+    id -- 杂物Id  
+    index -- 杂物index 
 }
 ```
 
@@ -2920,39 +2915,39 @@ return result
 ####传入参数
 ```
 {
-	"destroyedBuildings":"被摧毁的建筑数",
-	"totalBuildings":"总建筑数",
-	"isTownHallDestroyed":"大厅是否被摧毁",
-	"winScore":"胜利奖励积分",
-	"loseScore":"失败减去积分"
+    "destroyedBuildings":"被摧毁的建筑数",
+    "totalBuildings":"总建筑数",
+    "isTownHallDestroyed":"大厅是否被摧毁",
+    "winScore":"胜利奖励积分",
+    "loseScore":"失败减去积分"
 }
 ```
 ####返回参数
 ```
 {
-	"isVictory":"是否胜利",
-	"destroyRate":"整数，以百分比显示的摧毁比例",
-	"score":"积分增减值",
-	"stars":"胜利星级"
+    "isVictory":"是否胜利",
+    "destroyRate":"整数，以百分比显示的摧毁比例",
+    "score":"积分增减值",
+    "stars":"胜利星级"
 }
 ```
 ####示例传入数据
 ```
 {
-	"destroyedBuildings":3,
-	"totalBuildings":6,
-	"isTownHallDestroyed":false,
-	"winScore":20,
-	"loseScore":-10
+    "destroyedBuildings":3,
+    "totalBuildings":6,
+    "isTownHallDestroyed":false,
+    "winScore":20,
+    "loseScore":-10
 }
 ```
 ####示例返回数据
 ```
 {
-	"isVictory":true,
-	"destroyRate":50,
-	"score":7,
-	"stars":1
+    "isVictory":true,
+    "destroyRate":50,
+    "score":7,
+    "stars":1
 }
 ```
 
@@ -3063,11 +3058,11 @@ return result
     "remainingTime":"到下次可用的剩余时间",
     "finishedTime":"下次可用的时刻",
     "weapons":[
-    	{
-    		"id":"武器ID",
-    		"count":"武器数量"
-    	},
-    	...
+        {
+            "id":"武器ID",
+            "count":"武器数量"
+        },
+        ...
     ]
 }
 ```
@@ -3078,11 +3073,11 @@ return result
     "remainingTime":0,
     "finishedTime":1360000000,
     "weapons":[
-    	{
-    		"id":1,
-    		"count":1
-    	},
-    	...
+        {
+            "id":1,
+            "count":1
+        },
+        ...
     ]
 }
 ```
@@ -3091,19 +3086,19 @@ return result
 ####传入数据
 ```
 {
-	"id":"可选参数，武器id"
+    "id":"可选参数，武器id"
 }
 ```
 ####返回数据
 ```
 {
-	"weapons":[
-		{
-			"id":"武器ID",
-			"武器属性名":"属性值"
-		},
-		...
-	]
+    "weapons":[
+        {
+            "id":"武器ID",
+            "武器属性名":"属性值"
+        },
+        ...
+    ]
 }
 ```
 ####示例传入数据
@@ -3113,25 +3108,25 @@ return result
 ####示例传出数据
 ```
 {
-	"weapons":[
-		{
-			"id":1,
-		    "launchTime":2,
-		    "damage":1,
-		    "goldPrice":250
-		},
-		{
-		    "id":2,
-		    "affectTime":10,
-		    "goldPrice":100
-		},
-		{
-			"id":3,
-			"affectTime":8,
-			"goldPrice":200
-		},
-		...
-	]
+    "weapons":[
+        {
+            "id":1,
+            "launchTime":2,
+            "damage":1,
+            "goldPrice":250
+        },
+        {
+            "id":2,
+            "affectTime":10,
+            "goldPrice":100
+        },
+        {
+            "id":3,
+            "affectTime":8,
+            "goldPrice":200
+        },
+        ...
+    ]
 }
 ```
 ### buyWeapon
@@ -3140,29 +3135,29 @@ return result
 ####传入数据
 ```
 {
-	"id":"武器ID"
+    "id":"武器ID"
 }
 ```
 ####返回数据
 ```
 {
-	"canBuy":"是否可以购买",
-	"lackGold":"缺少的金币数",
-	"needGems":"兑换金币所需的宝石数"
+    "canBuy":"是否可以购买",
+    "lackGold":"缺少的金币数",
+    "needGems":"兑换金币所需的宝石数"
 }
 ```
 ####示例传入数据
 ```
 {
-	"id":1
+    "id":1
 }
 ```
 ####示例返回数据
 ```
 {
-	"canBuy":false,
-	"lackGold":500,
-	"needGems":30
+    "canBuy":false,
+    "lackGold":500,
+    "needGems":30
 }
 ```
 ### useWeapon
@@ -3170,7 +3165,7 @@ return result
 ####传入参数
 ```
 {
-	id = "使用的武器id"
+    id = "使用的武器id"
 }
 ```
 ####传出参数
@@ -3178,7 +3173,7 @@ return result
 ####示例传入数据
 ```
 {
-	id = 1
+    id = 1
 }
 ```
 
@@ -3187,12 +3182,12 @@ return result
 ####传入参数
 ```
 {
-	"weapons":[
-		排第1位的武器ID,
-		排第2位的武器ID,
-		排第3位的武器ID,
-		...
-	]
+    "weapons":[
+        排第1位的武器ID,
+        排第2位的武器ID,
+        排第3位的武器ID,
+        ...
+    ]
 }
 ```
 ####传出参数
@@ -3200,7 +3195,7 @@ return result
 ####示例传入数据
 ```
 {
-	"weapons":[2,1,3]
+    "weapons":[2,1,3]
 }
 ```
 

@@ -300,7 +300,7 @@ ps:金币库存已满 金币就会被系统吞掉
 ### processStatus
 计算建筑数据的最新状态。
 *传入参数*
-```json
+```
 {
     "data":{
         json string, "architecture":"lua table string"
@@ -308,7 +308,7 @@ ps:金币库存已满 金币就会被系统吞掉
 }
 ```
 *传出参数*
-```json
+```
 {
     "data":"json string"
 }

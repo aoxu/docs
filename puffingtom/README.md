@@ -294,11 +294,25 @@ ps:金币库存已满 金币就会被系统吞掉
 * -101,信息不存在
 * -107，空闲builder 不足
 
-
-
-
 建筑模块 architecture
 ----------------------
+
+### processStatus
+计算建筑数据的最新状态。
+*传入参数*
+```json
+{
+    "data":{
+        json string, "architecture":"lua table string"
+    }
+}
+```
+*传出参数*
+```json
+{
+    "data":"json string"
+}
+```
 
 ### listArchConfig
 查询所有建筑id列表。

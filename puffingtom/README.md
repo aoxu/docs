@@ -7,7 +7,7 @@ Star Legend Lua API
 ### login
 用户登录 同步数据，和数据初始化  
 
-*传入参数*
+####传入参数
 ```
 待定
 ```
@@ -1684,25 +1684,87 @@ index --
 
 资源模块 resource
 ------------------
+由于新增了一种资源类型：氢 hydrogen，并且资源建筑拆分为采集和存储两个部分，所以原先的金矿（Goldmine）模块修改为资源模块（Resource）。资源模块对两种资源做相同的逻辑处理，包括采集，存储，消费，宝石兑换，资源建筑的建造升级等。
 
-### setUserGoldmine
-金矿建造或升级完成时 调用 保存玩家金矿功能信息
-
+### getConfig 查询配置
+查询 所有/指定等级 的 金/氢 建筑配置信息。
 ####传入参数
-```
-“level”: -- level
-"index": -- 建筑Id
-
-```
-
-######返回信息：
-```
+```json
 {
-    "ret": 0,
-    "errMsg": ""
+    "genre":"gold / hydrogen",
+    "arch":"collector / storage",
+    "level":"可选参数，建筑等级"
 }
-
 ```
+####传出参数
+对应配置信息。
+
+### getUserData 查询用户数据
+查询 所有/指定index 的 金/氢 建筑数据。
+####传入参数
+```json
+{
+    "genre":"资源类型，gold / hydrogen",
+    "arch":"可选参数，建筑名称，collector / storage",
+    "index":"可选参数，建筑的index"
+}
+```
+####传出参数
+对应用户数据，包括现有资源量，资源上限，以及每个资源建筑的用户数据。
+
+### getStatus
+查询所有/指定资源建筑的状态，用于资源建筑状态条的显示。
+可以是采集器，也可以是仓库，但是仓库没有时间的字段。
+####传入参数
+```json
+{
+    "genre":"资源名称，gold / hydrogen",
+    "arch":"建筑名称，collector / storage",
+    "index":"可选参数，建筑的index"
+}
+```
+####传出参数
+```json
+{
+    "currentCount":"当前数量",
+    "capacity":"最大容量",
+    "remainingTime":"产满剩余时间",
+    "totalTime":"产满总时间",
+    "finishedMoment":"产满时刻"
+}
+```
+
+### gather 收取采集器
+收取采集器已经产出的资源，放到仓库当中。
+采集后的资源均匀存放在仓库里。
+####传入参数
+```json
+{
+    "genre":"gold / hydrogen",
+    "index":"建筑index"
+}
+```
+####传出参数
+```json
+{
+    "gatheredCount":"收取出来的数量",
+    "currentCount":"采集器里剩余的数量"
+}
+```
+
+### changeResource 增减资源
+原来的`addGold`和`deductGold`合并。
+增加或减少资源，不影响采集器，只把增减体均匀分散到在每个仓库里。
+####传入参数
+两个可选参数，可以只传入其中一个。
+```json
+{
+    "gold":"增减数，增加用正数，减少用负数",
+    "hydrogen":"增减数，增加用正数，减少用负数"
+}
+```
+####传出参数
+{}
 
 ### getGoldmineInfo
 获取对应等级或全部等级的金矿功能信息

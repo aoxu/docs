@@ -488,14 +488,13 @@ Changelog
 原先的防御建筑接口和数据，与建造建筑相关的部分都合并到了architecture模块。只保留了getConfig接口用于查询战斗相关的配置。
 
 ### getConfig 查询防御建筑配置
-其中SpringJump只有一级。
 ####传入参数
 ```json
 {
     "id":"可选参数，建筑id",
     "level":"可选参数，建筑等级"
 }
-···
+```
 ####传出参数
 ```json
 {
@@ -505,7 +504,7 @@ Changelog
 
 
 资源模块 resource
-------------------
+-----------------------
 由于新增了一种资源类型：氢 hydrogen，并且资源建筑拆分为采集和存储两个部分，所以原先的金矿（Goldmine）模块修改为资源模块（Resource）。资源模块对两种资源做相同的逻辑处理，包括采集，存储，消费，宝石兑换，资源建筑的建造升级等。
 
 ### getConfig 查询配置
@@ -592,7 +591,7 @@ Changelog
 ----------------------
 原先的`groceryShop`模块改名为`grocery`。
 
-###10.1. getUnlockedDifference 查询杂货铺解锁的新杂货
+### getUnlockedDifference 查询杂货铺解锁的新杂货
 原先的`getGroceryShopInfo`改名为`getUnlockedDifference`。
 ####传入参数
 ```json
@@ -612,7 +611,7 @@ Changelog
 }
 ```
 
-###10.2. getConfig 查询配置
+### getConfig 查询配置
 ####传入参数
 ```json
 {
@@ -623,7 +622,7 @@ Changelog
 ####传出参数
 配置数据。
 
-###10.3. getItems 查询可购买的杂货商品
+### getItems 查询可购买的杂货商品
 原先的`getCanBuy`改名为`getItems`。
 ####传入参数
 ```json

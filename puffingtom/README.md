@@ -1,301 +1,259 @@
 Star Legend Lua API
 ======================
 
+Changelog
+----------------------
+在v1.1版中对Lua层整体进行了重构，包括模块划分、接口设计和数据设计，主要遵循以下几个原则：
+1. 每个模块的相同功能接口，保持相同的命名，并尽量在通用逻辑上复用接口。
+2. 相同意义的数据项，保持相同的命名，并且修正拼写错误的命名。
+3. 在接口参数中使用名称或ID。
+4. 由于避免与lua标准库函数type名字冲突，类型使用genre表示。
+
 用户模块 user
 ----------------------
+跟用户相关的接口，例如查用户的资源数据。
 
-### login
-用户登录 同步数据，和数据初始化  
-
+### firstLogin 首次登录初始化
 ####传入参数
-```
-待定
-```
-*返回信息*
-```
-{"ret":0,"errMsg":""}
-```
-*错误情况*
-
-* -101,参数错误
-
-### getUserInfo
-获取客户端用户信息  
-
-
-####传入参数
-
-```
+```json
 {
-
+    "user":"lua table string"
 }
- 
 ```
+####传出参数
+{}
 
-######返回信息：
-```
+### getResource 查询资源量
+查询资源量，包括金和氢的当前总量/总容量。实际是操作resource模块的数据。
+####传入参数
+{}
+####传出参数
+```json
 {
-    "errMsg": "",
-    "data": {
-        "gameCenter": "kinder12345",
-        "lastPlunder": 20,
-        "facebookName": "",
-        "id": 1,
-        "registerTime": "1369195200",
-        "nickName": "kinder",
-        "goldCoinCount": 0,
-        "idleBuilderNum": 1,
-        "facebookId": "",
-        "lastLoginTime": "1369281600",
-        "status": 0,
-        "selectedHeroId": 1,
-        "gemCount": 10,
-        "region": "en"
+    "gold":{
+        "currentCount":"当前金量",
+        "capacity":"金容量"
     },
-    "ret": 0
+    "hydrogen":{
+        "currentCount":"当前氢量",
+        "capacity":"氢容量"
+    }
 }
-ps:数据结构待定
-
 ```
-####错误情况
 
-* -102,信息不存在 
-
-
-
-### getUserGold
-获取用户金矿存储金币总额
-
+### getUserData 查询用户数据
 ####传入参数
-
-```
+{}
+####传出参数
+很多字段，包括保护剩余时间。
+```json
 {
-
+    "protectionRemainingTime":"保护剩余时间"
 }
- 
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "ret": 0,
-    "goldCount": 0
-}
-
 ```
 
-#####错误情况
-* -102,信息不存在
-
-
-### addGold
-增加金币到金矿存储  
+### changeGems 增加/消耗宝石数
+原先的`addGem`和`deductGem`合并，改名为`changeGems`。
 ####传入参数
-
-```
+```json
 {
-"gold" : -- 金币数量
+    "gems":"number, 增加用正数，减少用负数"
 }
-
 ```
-ps:金币库存已满 金币就会被系统吞掉
-
-######返回信息：
-
-```
+####传出参数
+```json
 {
-    "errMsg": "",
-    "ret": 0,
-    "goldCount": 1000
+    "count":"增减后的拥有宝石数"
 }
-
 ```
-#####错误情况
-* -101,参数错误
-* -102,信息不存在
 
-
-### deductGold
-扣除金矿中的金币库存  
+### getGems 查询宝石数
+原先的`getUserGem`改名为`getGems`。
 ####传入参数
-
-```
+{}
+####传出参数
+```json
 {
-
-"gold" : -- 金币数量
-
+    "count":"gems count"
 }
-
-```
-######返回信息：
-
 ```
 
-{
-    "errMsg": "",
-    "ret": 0,
-    "goldCount": 1000
-}
- 
-```
-#####错误信息
-* -101,参数错误
-* -102,信息不存在
-* -103,金币不足 
-
-
-### getUserGem
-查询宝石总数
+### finishGuide 完成新手引导
+原先的`setGuideFinish`改名为`finishGuide`。
 ####传入参数
-```
-{
- 
-}
+{}
+####传出参数
+{}
 
-```
-
-######返回信息：
-```
-{
-    "errMsg": "",
-    "gemCount": 10,
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101,信息不存在
- 
-
-
-### addGem
-增加宝石  
+### getBuildSkills 查询建造技能状态
+原先的`getBuilderNumberLimit`和`getIdleBuilder`合并，改名为`getBuildSkills`。
 ####传入参数
-
-```
+{}
+####传出参数
+```json
 {
-"gem": -- 宝石数量
+    "idleCount":"空闲的建造技能个数",
+    "capacity":"建造技能容量"
 }
-
 ```
 
-
-######返回信息：
-```
-{
-    "errMsg": "",
-    "gemCount": 310,
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101，信息不存在
-* -102，参数错误
-
- 
-
-
-### deductGem
-扣除宝石  
+### changeBuildSkills 增加/减少建造技能数
+原先的`addBuilder`和`deductBuilder`合并，改名为`changeBuildSkills`。
 ####传入参数
-
-```
-"gem": -- 宝石数量
-
-```
-
-######返回信息：
-```
-
+```json
 {
-    "errMsg": "",
-    "gemCount": 10,
-    "ret": 0
+    "operation":"add 增加/ deduct减少"
 }
- 
 ```
-#####错误情况
-* -101，信息不存在
-* -104，宝石不足
- 
+####传出参数
+{}
 
-
-### getIdleBuilder
-获取空闲builder 个数
+### changeScore 增加/减少天梯积分
+原先的`addScore`改名为`changeScore`。
 ####传入参数
-
-```
+```json
 {
-
+    "score":"变化的积分数，增加用正数，减少用负数"
 }
 ```
-######返回信息：
-
-```
-
+####传出参数
+```json
 {
-    "errMsg": "",
-    "builderNum": 1,
-    "ret": 0
+    "count":"增减后的积分"
 }
- 
 ```
-#####错误情况
-* -101，信息不存在
 
-
-#### addBuilder
-增加空闲builder 个数 一次增加1
+### setFacebookData 设定Facebook数据
+原先的`setFbInfo`改名为`setFacebookData`。
 ####传入参数
-
-```
+```json
 {
-
+    "id":"facebook id",
+    "name":"facebook name"
 }
 ```
-####返回信息：
+####传出参数
+{}
 
-```
-
-{
-    "errMsg": "",
-    "builderNum": 1,
-    "ret": 0
-}
- 
-```
-####错误情况
-* -101，信息不存在
-
-
-### deductBuilder
-减少空闲builder 个数 一次减1
+### setProtection 开启/关闭保护
+原先的`setProtectionRemainingTime`改名为`setProtection`。
 ####传入参数
-
-```
+```json
 {
-
+    "protectionRemainingTime":"number"
 }
 ```
-######返回信息：
-
-```
-
-{
-    "errMsg": "",
-    "builderNum": 1,
-    "ret": 0
-}
- 
-```
-#####错误情况
-* -101,信息不存在
-* -107，空闲builder 不足
+####传出参数
+{}
 
 建筑模块 architecture
 ----------------------
+### canBuild 查询是否满足建造/升级条件
+检查指定建筑是否满足建造、升级的各种条件。
+####传入参数
+```json
+{
+    "id":"建筑id",
+    "index":"同类建筑编号，可选参数，当查询是否可升级时传入"
+}
+```
+####传出参数
+```json
+{
+    "canBuild":"是否可建造/升级",
+    "isBuilding":"是否正在建造",
+    "isDependArch":"是否满足建筑科技树依赖条件",
+    "isResource":"是否有足够的资源（金、氢）",
+    "needResource":{
+        "gold":"金币不够时，还差的金币数",
+        "hydrogen":"氢不够时，还差的氢量"
+    },
+    "needGems":"资源不够时，兑换资源所需的宝石数",
+    "isBuildSkill":"是否有足够的建造技能数"
+}
+```
+
+### getConfig 查询配置
+原先的`getArchConfig`改名为`getConfig`。  
+可以查询建筑的相关配置，包括可建造的等级，每个等级的价格，建造时间。
+例外的是，只有SpringJump是按建造的个数来定价格和建造时间的，所以SpringJump的配置是按个数排列的，也可以按个数查询，为了简化接口，个数没有新增字段，而是复用level字段来传递。
+####传入参数
+```json
+{
+    "id":"可选参数，建筑id",
+    "level":"可选参数，建筑等级，如果是查SpringJump，这个参数表示第几个",
+    "genre":"可选参数，defense表示查询所有防御建筑"
+}
+```
+####传出参数
+```json
+{
+    "data":"对应建筑配置数据"
+}
+```
+
+### getUserData 查询用户数据
+原先的`getUserArch`改名为`getUserData`。
+####传入参数
+```json
+{
+    "id":"architecture id",
+    "index":"architecture index"
+}
+```
+####传出参数
+对应用户数据
+
+### build 建造/升级建筑
+原先的`buildArch`改名为`build`。
+####传入参数
+```json
+{
+    "id":"建筑id",
+    "index":"在升级时传入"
+}
+```
+####传出参数
+```json
+{
+    "index":"新建时返回新建筑的index"
+}
+```
+
+### finishNow 快速完成建造/升级建筑
+原先的`finishByGems`改名为`finishNow`。
+用宝石快速完成。
+####传入参数
+```json
+{
+    "id":"建筑id",
+    "index":"建筑index"
+}
+```
+####传出参数
+```json
+{
+    "gems":"消费宝石数"
+}
+```
+
+### getUnlockedDifference 查询CommandCenter解锁的建筑
+传入Command Center等级，查询升到这一级会解锁的建筑，包括最高等级和最大数量。
+####传入参数
+```json
+{
+    "level":"Command Center level"
+}
+```
+####传出参数
+```json
+{
+    "data":[
+        {"id":"建筑id", "name":"名称", "count":"最大数量差", "level":"最高等级"},
+        ...
+    ]
+}
+```
 
 ### processStatus
 计算建筑数据的最新状态。
@@ -314,1373 +272,237 @@ ps:金币库存已满 金币就会被系统吞掉
 }
 ```
 
-### listArchConfig
-查询所有建筑id列表。
-####传入参数
-```
-{
-}
-```
-####返回参数
-```
-{
-    idArray -- 配置里的所有建筑id列表
-}
-
-```
-####示例返回数据
-```
-{
-    "1":{ "id":1, "name":"TownHall" },
-    "2":{ "id":2, "name":"GoldMine" },
-    "3":{ "id":3, "name":"HeroAltar" },
-    "4":{ "id":4, "name":"SkillResearch" },
-    "5":{ "id":5, "name":"DefenseDepartment" },
-    "6":{ "id":6, "name":"Groceries" },
-    "7":{ "id":7, "name":"ExploreTower" }
-}
-```
-
-### getArchConfig
-查询建筑配置。  
-可以按id查询所有级别的建筑配置，或者指定id和level查询建筑配置。
-####传入参数
-```
-{
-    "id":"建筑id",
-    "level":"建筑级别，可选参数"
-}
-```
-####传出参数（根据传入参数，有2种格式）
-#####if level == nil then. 根据level不同，可能返回多个建筑
-```
-{
-    "name":"建筑名称",
-    "1":{
-        "level":"建筑级别",
-        "dependArchId":"依赖建筑id",
-        "dependArchLevel":"依赖建筑级别",
-        "capacity":"个数上限", 
-        "price":"价格", 
-        "totalTime":"建造/升级总时间",
-        "maxLevel":{
-            "建筑id":"建筑最高能够建造的等级",
-            ...
-        },
-        "maxCouunt":{
-            "建筑id":"建筑最多能够建造的个数",
-            ...
-        }
-    }
-}
-```
-#####if level ~= nil then
-```
-{
-    "name":"建筑名称", 
-    "level":"建筑级别", 
-    "dependArchId":"依赖建筑id", 
-    "dependArchLevel":"依赖建筑级别",
-    "capacity":"个数上限",
-    "price":"价格",
-    "totalTime":"建造/升级总时间",
-    "maxLevel":{
-        "建筑id":"建筑最高能够建造的等级",
-        ...
-    },
-    "maxCouunt":{
-        "建筑id":"建筑最多能够建造的个数",
-        ...
-    }
-}
-```
-####示例传入数据
-```
-{
-    "id":1,
-    "level":1
-}
-```
-####示例返回数据
-#####if level == nil then
-```
-{
-    "id":1,
-    "name":"TownHall",
-    "1":{
-        "level":1, "dependArchId":0, "dependArchLevel":0, "capacity":1, "price":10000, "totalTime":60,
-        "maxLevel":{ "1":1, "2":1, "3":1, "4":1, "5":1, "6":1, "7":1 },
-        "maxCount":{ "2":1 }
-    },
-    "2":{
-        "level":2, "dependArchId":1, "dependArchLevel":1, "capacity":1, "price":20000, "totalTime":60,
-        "maxLevel":{ "1":2, "2":2, "3":2, "4":2, "5":2, "6":2, "7":3 },
-        "maxCount":{ "2":1 }
-    },
-    "3":{
-        "level":3, "dependArchId":1, "dependArchLevel":2, "capacity":1, "price":30000, "totalTime":60,
-        "maxLevel":{ "1":2, "2":2, "3":2, "4":2, "5":2, "6":2, "7":2 },
-        "maxCount":{ "2":2 }
-    }
-}
-```
-#####if level ~= nil then
-```
-{
-  "capacity": 1,
-  "dependArchId": 1,
-  "dependArchLevel": 2,
-  "id": 1,
-  "level": 3,
-  "name": "TownHall",
-  "price": 30000,
-  "totalTime": 60,
-  "maxLevel":{ "1":2, "2":2, "3":2, "4":2, "5":2, "6":2, "7":2 },
-  "maxCount":{ "2":2 }
-}
-```
-####异常情况
-* -301 没有指定的建筑配置（传入的id或level找不到）
-
-### getUserArch
-列出用户所有建筑。  
-还可以传入id或index，查询用户指定的建筑。  
-####传入参数
-```
-{
-    "id":"建筑id，可选参数",
-    "index":"同类建筑编号，同一个id下保证不重复，可选参数"
-}
-```
-####返回参数（根据传入参数的不同，可能有多种返回结果）
-```
-{
-    "1":{
-        "id":"建筑id",
-        "1":{
-            "index":"同类建筑编号",
-            "level":"建筑级别",
-            "pos":{ "x":"x座标", "y":"y座标" },
-            "finishedTime":"完成时刻",
-            "isBuilding":"是否正在建造/升级",
-            "remainingTime":"建造/升级剩余时间"
-        } -- 根据index的不同，可能有多个
-    } -- 根据id的不同，可能有多个
-}
-```
-####示例传入数据
-```
-{
-    "id":1,
-    "index":1
-}
-```
-####示例返回数据
-#####传入参数为空的情况
-```
-{
-    "1":{
-        "id":1,
-        "1":{
-            "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
-        }
-    },
-    "2":{
-        "id":2,
-        "1":{
-            "index":1, "level":1, "pos":{ "x":150, "y":150 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-        },
-        "2":{
-            "index":2, "level":1, "pos":{ "x":200, "y":200 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-        },
-        "3":{
-            "index":3, "level":1, "pos":{ "x":300, "y":300 }, "finishedTime":18948788493, "isBuilding":true, "remainingTime":1234
-        }
-    }
-}
-```
-#####传入id的情况
-```
-{
-    "id":1,
-    "1":{
-        "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
-    }
-}
-```
-#####传入id和index的情况
-```
-{
-    "index":1, "level":1, "pos":{ "x":100, "y":100 }, "finishedTime":0, "isBuilding":false, "remainingTime":0
-}
-```
-####异常情况
-* -302 没有指定的建筑（传入的index找不到）
-
-### canBuild
-查询是否满足建造/升级的条件。
-返回结果中包含哪些条件满足，哪些条件不满足。
-####传入参数
-```
-{
-    "id":"建筑id"
-    "index":"同类建筑编号，可选参数，当查询是否可升级时传入"
-}
-```
-####返回参数
-```
-{
-    "canBuild":"是否可建造/升级",
-    "isBuilding":"是否正在建造"
-    "isDependArch":"是否满足建筑科技树依赖条件"
-    "isGold":"是否有足够的金币",
-    "needGold":"金币不够时，还差的金币数",
-    "needGem":"金币不够时，兑换金币所需的宝石数",
-    "isBuildSkill":"是否有足够的建造技能数"
-}
-```
-####示例传入数据
-```
-{
-    "id":1,
-    "index":1
-}
-```
-####示例返回数据
-```
-{
-    "canBuild":0,
-    "isBuidling":true,
-    "isDependArch":true,
-    "isGold":false,
-    "needGold":1000,
-    "needGem":10,
-    "isBuildSkill":false
-}
-```
-####异常情况
-* -302 没有指定的建筑（传入的index找不到）
-
-### buildArch
-建造/升级建筑。  
-根据传入index来确定是建造新建筑还是升级已有建筑。建造/升级建筑会减去金币、Mr.O的建造技能数，并且需要等待时间完成。
-####传入参数
-```
-{
-    "id":"建筑id",
-    "index":"同类建筑编号。可选参数，如果升级，则需要传入。"
-}
-```
-####返回参数
-{}
-####示例传入数据
-```
-{
-    "id":1,
-    "index":1
-}
-```
-####异常情况
-* -302 没有指定的建筑（传入的index找不到）
-* -303 无法建造，不满足建筑科技树依赖条件
-* -304 无法建造，金币不足
-* -305 无法建造，Mr.O没有足够的空闲技能数
-* -306 无法建造，因为正在建造中
-
-### buildFinishDelegate
-建造/升级建筑完成的处理。注册到定时器中，当时间到时触发执行。
-####传入参数
-```
-{
-    "id":"建筑id",
-    "index":"同类建筑编号",
-    "level":"当前等级，如果是建造新建筑，则为0",
-    "pos":"x,y座标"
-}
-```
-####返回参数
-{}
-####示例传入数据
-```
-{
-    "id":1,
-    "index":1,
-    "level":1,
-    "pos":{"x":100, "y":200}
-}
-```
-
-
-#### finishByGems
-宝石快速完成建造/升级
-#####传入参数
-```
-{
-    "id":"建筑id",
-    "index":"同类建筑编号" 
-}
-```
-#####返回参数：
-```
-{
-    "gems":"消费宝石数"
-}
-```
-#####传入数据示例
-```
-{
-    "id":1,
-    "index":2
-}
-```
-#####返回数据示例
-```
-{
-    "gems":123
-}
-```
-
-
-
-#### getStatus
-查询建筑状态
-#####传入参数
-```
-{
-    "id":"建筑 id",
-    "index":"同类建筑编号" 
-}
-```
-#####返回参数
-```
-{
-    "remainingTime":"剩余时间",
-    "totalTime":"建造/升级总时间",
-}
-```
-#####示例传入数据
-```
-{
-    "id":1,
-    "index":2
-}
-```
-#####示例返回数据
-```
-{
-    "remainingTime":123,
-    "totalTime":12345
-}
-```
 
 英雄模块 hero
 ----------------------
+由于升级英雄祭坛建筑就可以解锁新英雄，所以建造完成的逻辑有变化。
 
-### getHeroConfig
-#####接口说明：得到英雄的配置信息
-#####传入参数说明：
-```
+### getUnlockedDifference 查询英雄祭坛解锁的英雄
+原先的`getHeroInfo`改名为`getUnlockedDifference`。
+####传入参数
+```json
 {
-    heroId --英雄id
-    level  --英雄等级，可选
+    "level":"英雄塔等级"
 }
 ```
-#####返回参数：
-```
-* heroList:英雄等级配置列表
+####传出参数
+```json
 {
-    "ret":0,                --返回值，判断是否拉取到
-    "heroName":"MR.Q",      --英雄名称
-    "maxLevel": 5           --最大等级
-    "levels":               --英雄等级配置数据
-    {
-    "heroAltarLevel":1,     --依赖英雄塔
-    "jumpHeight":2,         --弹跳高度
-    "lifeSpeed":60,         --生命恢复速度
-    "price":10,             --当前等级购买价格
-    "jumpWidth":5,          --弹跳宽度
-    "lives":5,              --最高生命值
-    "waitingTime":60,       --升级等待时间
-    "speed":6,              --英雄运动速度
-    "level":1,              --等级
-    "id":1              --专属技能
+    "data":[
+        {
+            "id":"hero id",
+            "name":"hero name",
+            "level":"解锁的英雄最高等级"
+        }
+    ]
+}
+```
+
+### getConfig 查询配置
+原先的`getHeroConfig`改名为`getConfig`。
+####传入参数
+```json
+{
+    "id":"可选参数，hero id",
+    "level":"可选参数，hero level"
+}
+```
+####传出参数
+```json
+{
+    "data":"config"
+}
+```
+### getUserData 查询用户数据
+原先的`getUserHeroes`改名为`getUserData`。
+####传入参数
+```json
+{
+    "id":"可选参数，hero id"
+}
+```
+####传出参数
+```json
+{
+    "data":{
+        "id":"英雄id",
+        "level":"英雄等级，如果是正在召唤的新英雄，等级为0",
+        "isPaused":"是否正在暂停召唤，只有为false时才能用",
+        "lives":"现在的生命数",
+        "summonFinishedMoment":"召唤完成时刻",
+        "summonRemainingTime":"召唤剩余时间",
+        "recoverFinishedMoment":"恢复到满血时刻"
     }
 }
 ```
-####示例返回数据
-```
+
+技能模块 skill
+----------------------
+原来的`skills`改名为`skill`，所有模块名使用单数，跟architecture和hero模块名一致。
+由于升级技能研究中心就可以解锁新技能，所以建造完成的逻辑有变化。
+
+### getUnlockedDifference 查询技能学院解锁的技能
+原先的`getSkillInstituteInfo`改名为`getUnlockedDifference`。
+
+### getUserData 查询用户数据
+原先的`getSkillsList`改名为`getUserData`。
+
+### getConfig 查询配置
+####传入参数
+```json
 {
-    "ret":0,
-    "errMsg":"",
-    "heroName":"MR.Q",
-    "maxLevel":5,
-    "levels":
-    {
-    "heroAltarLevel":1,
-    "jumpHeight":2,
-    "lifeSpeed":60,
-    "price":10,
-    "jumpWidth":5,
-    "lives":5,
-    "waitingTime":60,
-    "speed":6,
-    "level":1,
-    "id":1
+    "id":"skill id",
+    "level":"skill level",
+    "genre":"可选参数，传common表示查询公共配置"
+}
+```
+####传出参数
+配置数据。
+
+
+科技模块 tech
+---------------------
+科技中心负责英雄和技能的升级。实际上科技中心读写的是英雄和技能模块的数据。
+
+### getItems 查询升级项目
+查询所有在科技中心里的升级项目，如果级别为0表示玩家还没有这个技能。
+####传入参数
+{}
+####传出参数
+数组下标就是id。
+```json
+{
+    "hero":{
+        "unlocked":{
+            {
+                "id":"hero id",
+                "level":"current level",
+                "price":"upgrade price",
+            },
+            ...
+        },
+        "locked":{
+            {
+                "id":"hero id",
+                "level":"current level",
+                "price":"upgrade price",
+                "dependArchLevel":"depending tech center level",
+                "isMaxLevel":"true / false, 是否已满级"
+            },
+            ...
+        }
+    },
+    "skill":{
+        "unlocked":{
+            {
+                "id":"skill id",
+                "level":"current level",
+                "price":"upgrade price"
+            },
+            ...
+        },
+        "locked":{
+            {
+                "id":"skill id",
+                "level":"current level",
+                "price":"upgrade price",
+                "dependArchLevel":"depending tech center level",
+                "isMaxLevel":"true / false，是否已满级"
+            },
+            ...
+        }
     }
 }
-
 ```
 
-#####错误情况：
-```
-* 无效的英雄id
-* 无效的等级
-```
-
-
-### add
-#####接口说明：召唤新的英雄
-#####传入参数说明：
-```
+### canUpgrade 查询是否满足升级的条件
+####传入参数
+```json
 {
-    heroId --英雄id
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
 }
 ```
-
-#####返回参数：
-```
+####传出参数
+```json
 {
-    ret --是否召唤成功
+    "canUpgrade":"true / false, true表示满足升级的所有条件",
+    "isUpgrading":"true / false, false表示当前没有正在升级的项目",
+    "isDependArch":"true / false, true表示满足依赖建筑的等级条件",
+    "isResource":"true / false, true表示资源足够",
+    "isGems":"true / false, true表示宝石足够",
+    "needGems":"number, 不够时所需的宝石数"
 }
 ```
-#####错误情况：
-```
-* 无效的英雄id
-* 已经召唤过了
-* 英雄塔级别不够
-* 金币不够
-```
-####示例返回数据
-```
-{
-    "ret":0, 
-    "errMsg":"",
-    "hero":
-    {
-        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-        "unlockedMoment":1369812987,
-        "status":1,
-        "heroId":2,
-        "lives":0,
-        "level":0
-    }
-}
-
-
-```
-
-
-### addAtOnce
-#####接口说明：使用宝石使新的英雄立即可以使用
-#####传入参数说明：
-```
-{
-    heroId --英雄id
-}
-```
-
-#####返回参数：
-```
-{
-    ret --是否召唤成功
-}
-```
-#####错误情况：
-```
-* 无效的英雄id
-* 已经召唤过了
-* 英雄塔级别不够
-* 金币不够
-```
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    "gem":20,
-    "hero":
-    {
-        "unlockedMoment":0,
-        "status":3,
-        "heroId":2,
-        "lives":5,
-        "level":1
-    }
-}
-
-```
-
 
 ### upgrade
-#####接口说明：升级英雄
-#####传入参数说明：
-
-```
-{
-    heroId --英雄id
-}
-```
-
-#####返回参数：
-```
-{
-    ret --是否升级成功
-}
-```
-#####错误情况：
-```
-{
-    * 无效的英雄id
-    * 已经最高等级
-    * 英雄塔级别不够
-    * 金币不够
-}
-```
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    "hero":
-    {
-        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-        "unlockedMoment":1369813683,
-        "status":2,
-        "heroId":2,
-        "lives":5,
-        "level":1
-    }
-}
-
-```
-
-### upgradeAtOnce
-#####接口说明：使用宝石直接升级英雄
-#####传入参数说明：
-
-```
-{
-    heroId --英雄id
-}
-```
-
-#####返回参数：
-```
-{
-    ret --是否升级成功
-}
-```
-#####错误情况：
-```
-{
-    * 无效的英雄id
-    * 已经最高等级
-    * 英雄塔级别不够
-    * 金币不够
-}
-```
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    "gem":20,
-    "hero":
-    {
-        "heroId":2,
-        "level":2,
-        "lives":5,
-        "unlockedMoment":0,
-        "status":3
-    }
-}
-
-```
-
-### getUserHeros
-#####接口说明：得到用户的英雄列表
-#####传入参数说明：
-```
-{
-    heroId --可选参数，不传则返回所有
-}
-```
-
-#####返回参数：
-```
-* 用户英雄信息
-```
-
-#####错误情况：
-```
-* 无
-```
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    "heroList":
-    [{
-        "startedMoment": 1369812987, --新增开始时间，用于显示时间进度
-        "unlockedMoment":1,
-        "totalTime":600,--总的建造时间
-        "remainingTime":600,--剩余时间
-        "status":1,
-        "heroId":2,
-        "lives":5,
-        "level":2,
-        "heroName":"Mr.Q"
-    }]
-}
-状态说明：
-heroStatusUnbuild=0 --未召唤
-heroStatusBuilding=1--召唤中
-heroStatusUpgrading=2--升级中
-heroStatusUsing=3--使用中
-```
-
-### attachPublicSkill
-#####接口说明：英雄绑定公共技能
-#####传入参数说明：
-```
-* heroId：英雄id
-* id：公共技能
-```
-#####返回参数：
-```
-* 绑定是否成功
-```
-
-#####错误情况：
-```
-* 无效的英雄id
-* 无效的技能id
-* 用户未拥有该英雄
-* 用户未拥有该技能
-```
-
-
-
-
-### loseLife
-#####接口说明：英雄战斗过程中掉血
-#####传入参数说明：
-```
-* heroId：英雄id
-```
-#####返回参数：
-```
-* 当前血量
-```
-#####错误情况：
-```
-* 无效的英雄id
-* 用户未拥有该英雄
-* 已经无血可减
-```
-
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    "hero":
-    {
-        "lifeAddedMoment":1369817925,
-        "heroId":2,
-        "unlockedMoment":0,
-        "status":3,
-        "level":2,
-        "lives":4
-    }
-}
-
-
-```
-
-
-### setFullLives
-#####接口说明：直接用宝石充能时使用，设置英雄满血
-#####传入参数说明：
-```
-* heroId：英雄id
-```
-#####返回参数：
-```
-* 当前血量
-```
-
-#####错误情况：
-```
-* 无效的英雄id
-* 用户未拥有该英雄
-* 已经满血
-```
-
-####示例返回数据
-```
-{
-    "ret":0,
-    "gem":20,
-    "errMsg":"",
-    "hero":
-    {
-        "lifeAddedMoment":0,
-        "level":2,
-        "unlockedMoment":0,
-        "status":3,
-        "heroId":2,
-        "lives":5
-    }
-}
-
-
-```
-
-### canBuild
-#####接口说明：返回单个英雄的状态，用于界面展示时使用
-#####传入参数说明：
-```
-* heroId：英雄id
-```
-#####返回参数：
-```
-* result.canBuild = false
-        result.isBuilding = false
-        result.isDependArch = false
-        result.isGold = false
-        result.isConflict = false
-{
-    ret, --是否升级成功
-    errMsg,
-    canBuild, --是否可以建造或者升级
-    isBuilding,--是否正在建造或者升级
-    isDependArch, --是否受英雄祭坛限制
-    isGold,     --金币是否足够
-    isConflict---是否冲突（英雄祭坛正在建造或者升级英雄）
-}
-```
-
-#####错误情况：
-```
-* 无效的英雄id
-```
-
-####示例返回数据
-```
-{
-    "ret":0,
-    "errMsg":"",
-    canBuild:0, --是否可以建造或者升级
-    isBuilding:0,--是否正在建造或者升级
-    isDependArch:0, --是否受英雄祭坛限制
-    isGold:0,       --金币是否足够
-    isConflict:0---是否冲突（英雄祭坛正在建造或者升级英雄）
-}
-```
-
-技能模块 skills
-----------------------
-
-### initDb
-内部使用，初始化技能
 ####传入参数
-```
+```json
 {
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
 }
 ```
-######返回信息：
+####传出参数
+{}
 
-```
-{
-
-}
-```
-
-
-### getSkillInstituteInfo
-获取技能研究所信息
+### finishNow 立即完成
 ####传入参数
-```
-{ 
-"level": -- 建筑等级 不传入返回所有等级 是数组
-}
-
-```
-
-######返回信息：
-
-```
+```json
 {
-    "ret": 0,
-    "errMsg": "",
-    "data":{
-    "id":1
-    "maxLevel":
-    "maxNumber": --可拥有数
-    "nameEn":
-    }
-    不传入level
-     "ret": 0,
-    "errMsg": "",
-    "data":{
-     [1]:{
-        "id":1
-        "maxLevel":
-        "maxNumber": --可拥有数
-        "nameEn":
-     }
-     [2]:{
-        "id":1
-        "maxLevel":
-        "maxNumber": --可拥有数
-        "nameEn":
-     }
-    }
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
 }
-
 ```
-#####错误情况
-* -101，参数错误
-* -102，信息不存在
-
-
-
-### getConfig
-获取技能信息 
+####传出参数
+```json
+{
+    "gems":"消费的宝石数"
+}
+```
+### getStatus 查询升级状态
+查询正在升级的项目，包括英雄和技能。
 ####传入参数
+{}
+####传出参数
 ```
 {
-"id": -- 技能id
-"level": -- 技能等级
-}
-
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "data":[],
-    "ret": 0
-    参数不传入返回所有
-}
-```
-#####错误情况
-* -101,信息不存在
-* -102,参数错误
-
- 
-
-
-### getSkillsList
-获取技能等级信息 可以都不传入参数 
-####传入参数
-```
-{
-"id" : -- id
-"level": -- 技能等级
-"type": 1 or nil  传入 则默认去掉 builder 技能 预留null空位
-}
-
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "data": 
-        tmp["id"]   = 0 -- id
-        tmp["nameEn"]   = 0 -- 名称
-        tmp["maxLevel"] = 0 -- 最大等级
-        tmp["attribute"] = 0 -- 技能详细信息
-        tmp["rechargeTime"] = 0 --充能时间
-        tmp["maxCapacity"] = 0 --最大拥有个数
-        tmp["hasSeveral"] = 0 --已有个数
-        tmp["chargedTime"] = 0 --充能时间
-        tmp["buyNeedGold"] = 0 --单个购买充能价格
-        tmp["finishedTime"] = 0 --完成时间
-        tmp["needGold"] = 0 --金币不足时返回的差额
-        tmp["needGem"] = 0 --差额兑换的宝石数
-        tmp["level"]=0, --等级
-        tmp["isGold"] true or false
-        tmp["isResearching"] true or false
-    "ret": 0
-}
-ps:当id 为 nil 时 返回所有技能信息
-
-```
-#####错误情况
-* -101，参数错误
-* -102，信息不存在
-
-
-
-### getStatus
-获取技能状态
-####传入参数
-```
-{
-"id": -- 技能id
-}
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "data": {
-    ["id"]
-    ["level"]
-    ["finishedTime"]
-    ["remainingTime"]
-    ["totalTime"]
-    ["needGem"] --快速完成宝石
-    ["isResearching"] -- 是否在学习中 true or false
+    "hero":{
+        "id":"hero id",
+        "level":"当前等级",
+        "finishedMoment":"升级完成时刻",
+        "remainingTime":"升级剩余时间"
     },
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101，参数错误
-* -102，信息不存在
-
-
-
-### research
-技能学习或升级
-####传入参数
-```
-
-{
-“id”: --
+    "skill":{
+        "id":"skill id",
+        "level":"当前等级",
+        "finishedMoment":"升级完成时刻",
+        "remainingTime":"升级剩余时间"
+    }
 }
 ```
-
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "remainingTime"
-    "finishedTime"
-    "totalTime"
-     "ret": 0
-}
-
-```
-
-####错误情况
-* -101，参数错误
-* -102，信息不存在
-
-
-
-
-### skillIsFinished
-完成回调
-####传入参数
-```
-{
-“id”:-- id
-}
-
-```
-
-
-######返回信息：
-```
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-####错误信息
-* -101，参数错误
-
-
-
-
-### finishByGems
-升级技能  
-####参数传入
-```
-{
-"id": -- 技能id
-}
-
-```
-######返回信息：
-
-```
-
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-####错误信息
-* -101，参数错误
-* -102，信息不存在
-* -103，金币不足
-* -106，等级不足
-* -104，宝石不足
-* -112，建筑正忙
-
-
-
-### addFinishedTime
-技能研究所升级时 调用 增加研究或升级的完成时间 
-####参数传入
-```
-{
-"time":-- 时间 秒
-
-}
-```
-
-######返回信息：
-
-```
-
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-
-#####错误情况
-* -101,参数错误
-
-
-
-### hasAction
-判断技能研究所是否在研究或升级
-
-####传入参数
-
-```
-{
-
-}
-
-```
-######返回信息：
-
-```
-{
-    “ret”:0,
-    "action":0, -- or 1
-    "errmMsg": "",
-}
-
-```
- 
-
-### addSkillNum
-增加技能容量个数
-
-####传入参数
-
-```
-{
-“skillName”:--技能名称,
-“num”:-- 个数
-}
-
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "skillNum": 5,
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101,参数不正确
-* -102,没有技能技能信息
-
-
-
-### deductSkillNum
-减少技能容量个数
-
-####传入参数
-
-```
-{
-"skillName":--技能名称,
-"num":-- 个数
-}
-
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "skillNum": 4,
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101,参数不正确
-* -102,没有技能技能信息
-* -502，技能数不足
-
-
-### finishByGems
-宝石升级消除时间
-####传入参数
-
-```
-{
-"id":--id,
-}
-
-```
-######返回信息：
-
-```
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-#####错误情况
-* -101，参数不正确
-* -102，没有技能技能信息
-* -104，宝石不足
 
 防御建筑模块 defense
 ----------------------
+模块名从`defenseBuild`改为`defense`。  
+原先的防御建筑接口和数据，与建造建筑相关的部分都合并到了architecture模块。只保留了getConfig接口用于查询战斗相关的配置。
 
-### getDefenseInfo
-获取防御建筑的Id的列表 data 的索引即是Id
+### getConfig 查询防御建筑配置
+其中SpringJump只有一级。
 ####传入参数
-```
+```json
 {
-    level - 防御部等级 
+    "id":"可选参数，建筑id",
+    "level":"可选参数，建筑等级"
 }
-```
-######返回信息：
-
-```
-传入了防御部等级 返回当前传入等级的信息
+···
+####传出参数
+```json
 {
-    "errMsg": "",
-    "data":{
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    ["id":1,"maxLevel":2,"maxNumber":2,"nameEn":"xxxxx"],
-    },
-    "ret": 0
-}
-不传入等级 将返回防御部等级 所有信息
-
-
-```
-
-### getDefenseBuildInfo
-获取所有建筑或指定建筑的信息
-####传入参数
-```
-{
-"id":--防御建筑id
-"level":--level 不传 返回1级信息
-}
-```
-######返回信息：
-
-```
-{
-    "ret": 0,
-    "errMsg": "",
-    "data":{
-    "id":1, -- 总时间
-    "nameEn":"xxxx", -- 剩余时间
-    "maxLevel":5, -- 所需要宝石
-    "attribute":{对应建筑的等级详细信息},
-    "islevel":true, -- 需要防御部等级是否够
-    "buildCount":5,--最大建造数量 或购买数量
-    "isFull":true, -- 是否满
-    "alreadyBuildCount":111,--已经建造或购买数量
-    "isGold":true, -- 建造或升级的金币是否够
-    "needGold":1000,--还差多少金币 
-    "isBuyPrice":true, -- 购买价格是否够 
-    "needBuyPrice":100, -- 还差多少购买价格
-    "isBuilder":true, -- builder数量是否够
-    }
-}
-
-```
-
-
-### getStatus
-查询当前防御建筑状态 返回当前剩余时间 总时间 完成时间 和结束完成的所需要宝石
-####传入参数
-```
-{
-"id":--防御建筑id
-"index":--index
+    "data":"对应建筑配置"
 }
 ```
 
-######返回信息：
-
-```
-{
-    "ret": 0,
-    "errMsg": "",
-    "data":{
-    "totalTime":222, -- 总时间
-    "remainingTime":2222, -- 剩余时间
-    "needGem":22, -- 所需要宝石
-    "finishedTime":2222 -- 完成时间
-    }
-}
-
-```
-
-### canBuild
-查询当前建筑是否能升级或建造 或购买  还差多少钱等等
-####传入参数
-
-```
-{
-    id = id 防御建筑id
-    index = index 传入index 就是查询当前已有的 没有的可以不穿 默认返回1级的配置信息
-}
-```
-######返回信息：
-
-```
-{
-    "ret": 0,
-    "errMsg": "",
-    "data":{
-    "id":1, -- 总时间
-    "nameEn":"xxxx", -- 剩余时间
-    "maxLevel":5, -- 所需要宝石
-    "attribute":{对应建筑的等级详细信息},
-    "islevel":true, -- 需要防御部等级是否够
-    "buildCount":5,--最大建造数量 或购买数量
-    "isFull":true, -- 是否满
-    "alreadyBuildCount":111,--已经建造或购买数量
-    "isGold":true, -- 建造或升级的金币是否够
-    "needGold":1000,--还差多少金币 
-    "isBuyPrice":true, -- 购买价格是否够 
-    "needBuyPrice":100, -- 还差多少购买价格
-    "isBuilder":true, -- builder数量是否够
-    "needGem":需要宝石 就是升级或建造时 金币差额 兑换宝石的个数
-    "needBuyGem": 阶梯特有 购买阶梯的时候 钱不够 会出现
-    }
-}
-
-```
-
-### build
-防御建筑的建造 或 升级
-####传入参数
-
-```
-{
-    id = id 防御建筑id
-    index = index 传入index就是升级
-}
-```
-######返回信息：
-
-```
-{
-    "ret":0,
-    "errMsg":"xx",
-    "usedGold":222, --花费金币
-    "totalTime":2222, -- 总时间
-    "index":1, --index
-    "finishedTime":1111 -- 完成时间 
-    
-这里金币不足时 我也做了输出 金币还差多少 需要多少宝石去换
-}
-
-
-```
-
-####错误情况
-* -101 参数错误
-* -102 信息不存在
-
-### isFinished
-建造完成回调
-
-####传入参数
-```
-{
-id --  建筑Id
-index -- 
-}
-
-```
-######返回信息：
-
-```
-{
-    "ret": 0
-    "errMsg":"xxx"
-}
-
-```
-
-
-
-
-### finishByGems
-用宝石加速
-####传入参数
-```
-
-{
-“id”: -- 建筑Id
-“index” -- index 
-}
-
-
-```
-
-######返回信息：
-
-
-```
-{
-    "ret": 0
-    "errMsg":"xxx"
-}
-
-```
 
 资源模块 resource
 ------------------
@@ -1766,759 +588,344 @@ index --
 ####传出参数
 {}
 
-### getGoldmineInfo
-获取对应等级或全部等级的金矿功能信息
-
-####传入参数
-```
-"level": -- level
-
-```
-
-######返回信息：
-```
-
-{
-    "errMsg": "",
-    "config": [
-        {
-            "productionLimit": 2000,
-            "perMinute": 20,
-            "saveGoldLimit": 20000
-        },
-        {
-            "productionLimit": 3000,
-            "perMinute": 30,
-            "saveGoldLimit": 30000
-        },
-        {
-            "productionLimit": 4000,
-            "perMinute": 40,
-            "saveGoldLimit": 40000
-        }
-    ],
-    "ret": 0
-}
-
-```
-####错误情况
-* 对应等级信息不存在
-
-### getUserGoldmineInfo
-得到玩家金矿信息
-
-####传入参数
-```
-"index": -- index
-
-```
-
-######返回信息：
-```
-
-{
-    "errMsg": "",
-    "config": {
-        "saveGold": 10000,
-        "productionLimit": 2000,
-        "productionFinishedTime": 1369924136,
-        "id": 1,
-        "level": 1,
-        "perMinute": 20,
-        "saveGoldLimit": 20000
-    },
-    "ret": 0
-}
-
-```
-
-### produce
-
-####传入参数
-```
-{
-"index":-- 建筑Id
-}
-
-
-```
-
-######返回信息：
-```
-
-{
-    "errMsg": "",
-    "ret": 0,
-    "gold": 2000
-}
-
-```
-
-### gather
-金矿金币收取
-
-####传入参数
-```
-
-{
-"index":-- 建筑Id
-}
-
-```
-
-######返回信息：
-```
-
-{
-    "errMsg": "",
-    "ret": 0,
-    "gold": 12000 -- 库存
-}
-
-```
-####错误情况
-* 没有金币产生
-
-
-### getSaveLimit
-
-####传入参数
-```
-
-{
-
-}
-
-```
-
-返回金币存储上限
-######返回信息：
-```
-{
-    "errMsg": "",
-    "saveGoldCount": 20000,
-    "ret": 0
-}
-
-```
-
-
-
-### exchange
-
-####传入参数
-```
-
-{
-
-}
-
-```
-
-返回金币存储上限
-######返回信息：
-```
-{"errMsg":"","data":{"half":{"gem":2732,"gold":273200},"all":{"gem":5464,"gold":546400}},"ret":0} 
-
-```
-
 杂货铺模块 grocery
 ----------------------
- 
-### getCanBuy
-#####接口说明：得到所有杂货列表
-#####传入参数说明：
-* id：杂货id or 不传
+原先的`groceryShop`模块改名为`grocery`。
 
-```
+###10.1. getUnlockedDifference 查询杂货铺解锁的新杂货
+原先的`getGroceryShopInfo`改名为`getUnlockedDifference`。
+####传入参数
+```json
 {
-"id":1 
+    "level":"杂货铺等级"
 }
-or
+```
+####传出参数
+```json
 {
+    {
+        "id":"grocery id",
+        "name":"grocery name",
+        "level":"new level"
+    },
+    ...
 }
-
 ```
 
-#####返回参数：
-* 杂货的配置列表
-
-```
-
+###10.2. getConfig 查询配置
+####传入参数
+```json
 {
-"ret":0,
-"errMsg":"",
-"data":{
-    [{
-    "id":1,
-    "name":"xxxx",
-    "canBuyNumber":4,
-    "buyNumber":2,
-    "needGold":500,
-    "isGold":true,
-    "isNumber":true,
-    "isLevel":true
-    }],
+    "id":"可选参数，杂货id",
+    "level":"可选参数，杂货等级"
 }
-
-}
-
 ```
+####传出参数
+配置数据。
 
-
-#####错误情况：
-* 无效的杂货id
-* 获取金币失败
-* 获取宝石失败预留
-
-
-
-### buyGrocery
-#####接口说明：购买杂货
-#####传入参数说明：
-* id：杂货id
-
-#####返回参数：
-* 购买是否成功
-
-#####错误情况：
-* 无效的杂货id
-* 个数已满
-* 杂货部等级部足
-* 金币不够
+###10.3. getItems 查询可购买的杂货商品
+原先的`getCanBuy`改名为`getItems`。
+####传入参数
+```json
+{
+    "id":"grocery id"
+}
+```
+####传出参数
 
 商店模块 shop
 ----------------------
+原先的`gameStore`模块改为`shop`，因为game多余，然后store与datastore里的存储意义有可能造成混淆，shop则与COC里一致。
 
-### getStoreItems
-#####接口说明：得到商店商品信息
-#####传入参数说明：
-* 无
-
-#####返回参数：
-* 商品列表
-
-#####错误情况：
-* 无
-
-
-
-### buyItem
-#####接口说明：购买商品
-#####传入参数说明：
-* type：商品类型，1-金币，2-宝石
-* itemId
-
-#####返回参数：
-* 购买是否成功，返回用户拥有商品情况
-
-#####错误情况：
-* 无效的商品名
-
-### exchangeTimeToGems
-#####接口说明：转换时间成对应的宝石数
-#####传入参数说明：
-```
-{
-    timestamp：时间戳
-}
-```
-#####返回参数：
-```
-* 对应的宝石数
-```
-#####错误情况：
-```
-* 无
-```
-#####示例返回例子
-```
-{
-    ret=0,
-    errMsg="",
-    gems=20,
-}
-```
-
-### goldExchangeGem
-用宝石兑换金币时，查询所需的宝石数。由于每个宝石都可以兑换很多金币，所以兑换后得到的金币数可能超出所需的金币数一点。
+### getNeedGemsForResource 计算兑换资源所需的宝石
+原先的`goldExchangeGem`改名，去除兑换的歧义，这个接口只计算兑换资源需要多少宝石，仅仅是查询，不做兑换操作。由于所需宝石数往往是多个，所以传出参数的`gem`改为`gems`。
 ####传入参数
-```
+两个可选参数，可以只传入其中一个。
+```json
 {
-    gold = "所需金币数"
+    "gold":"可选参数，可以为0",
+    "hydrogen":"可选参数，可以为0"
 }
 ```
-####返回参数
-```
+####传出参数
+```json
 {
-    gem = "兑换消费的宝石数"
-}
-```
-####示例传入数据
-```
-{
-    gold = 123
-}
-```
-####示例返回数据
-```
-{
-    gem = 3
+    "gems":"number"
 }
 ```
 
-### gemExchangeGold
-用宝石兑换金币，
-####输入参数
-```
-{
-    gem = "消费的宝石数"
+### getResourceProducts 查询资源商品
+原先的`exchange`改名为`getResourceProducts`。
+####传入参数
+{}
+####传出参数
+```json
+{   
+    "data":{
+        "fullGold":{
+            "resource":"need gold count to full",
+            "gems":"need gems to buy gold"
+        },
+        "halfGold":{
+            "resource":"need gold count to half full",
+            "gems":"need gems to buy gold"
+        },
+        "fullHydrogen":{
+            "resource":"need hydrogen count to full",
+            "gems":"need gems to buy hydrogen"
+        },
+        "halfHydrogen":{
+            "resource":"need hydrogen count to half full",
+            "gems":"need gems to buy hydrogen"
+        }
+    }
 }
 ```
-####返回参数
-```
+
+### getGemsProducts 查询宝石商品
+原先的`getStoreItems`改名为`getGemsProducts`。
+####传入参数
+{}
+####传出参数
+```json
 {
-    gold = "兑换出来的金币数"
+    "data":[
+        {"id":"com.weedo.PuffingTom.Gems.50", "count":50, "price":2.99},
+        {"id":"com.weedo.PuffingTom.Gems.150", "count":150, "price":4.99},
+        {"id":"com.weedo.PuffingTom.Gems.350", "count":350, "price":9.99},
+        {"id":"com.weedo.PuffingTom.Gems.1200", "count":1200, "price":29.99},
+        {"id":"com.weedo.PuffingTom.Gems.4000", "count":4000, "price":99.99},
+    ]
 }
 ```
-####示例输入数据
-```
+
+### buyGemsProduct 购买宝石商品
+原先的`buyItem`改名为`buyGemsProducts`。
+####传入参数
+```json
 {
-    gem = 3
+    "index":"选择购买的宝石商品序号"
 }
 ```
-####示例返回数据
-```
+####传出参数
+```json
 {
-    gold = 123
+    "count":"购买之后的宝石数"
 }
 ```
+
+### getNeedGemsForTime 计算兑换时间所需的宝石
+原先的`exchangeTimeToGems`改名为`getNeedGemsForTime`。
+这个接口只计算兑换资源需要多少宝石，仅仅是查询，不做兑换操作。
+计算的逻辑分为两种，分别是养成和恢复。养成指的是建筑的建造/升级，英雄的解锁/升级，技能的解锁/升级。恢复指的是战斗前的准备，包括英雄回血和技能充能。
+####传入参数
+```json
+{
+    "genre":"develop 养成 / recover 恢复",
+    "timestamp":"完成时刻"
+}
+```
+####传出参数
+```json
+{
+    "gems":"所需宝石数"
+}
+```
+
+### buyResource 宝石兑换指定数量的资源
+原先的`gemExchangeGold`改名为`buyResource`.
+####传入参数
+```json
+{
+    "genre":"gold / hydrogen",
+    "gems":"number"
+}
+```
+####传出参数
+```json
+{
+    "gold":"gold added",
+    "hydrogen":"hydrogen added"
+}
+```
+
 
 进攻模块(探索塔) attack
 ----------------------
+探索塔模块在逻辑层处理的是进攻相关的逻辑，exploreTower改名为attack。这样有3个好处：
+1. lua层只关注逻辑，应该以逻辑来划分模块和命名。
+2. lua模块与建筑名称无关，这样完全不受建筑改名的影响。
+3. 只有一个词，书写更简单。
 
-### getExploreTowerInfo
-返回探索塔信息 按等级返回 
-
+### getConfig 查询配置
+查询探索塔配置，例如最大携带技能容量，一次进攻所需的资源。  
 ####传入参数
-```
-{
-"level": --level or nil
+{}
+####传出参数
+配置信息。
 
-}
-
-```
-
-####返回信息
-
-```
-
-{
-    "errMsg": "",
-    "config": [
-        {
-            "skillNum": 2
-        },
-        {
-            "skillNum": 3
-        },
-        {
-            "skillNum": 4
-        }
-    ],
-    "ret": 0
-}
-
-```
-
-### attack
-出击，保存用户选择英雄和技能
+### addToBattle 添加到战备状态
+选择英雄、技能添加到战斗准备状态中，技能会开始充能，并扣除购买费用。
 ####传入参数
-```
+```json
 {
-"heroId": -- 英雄Id
-"revenge":0,--复仇 0 否 1是
-"skillsList":[1,2,3,4,5] -- skillId
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
+}
+```
+####传出参数
+{
 }
 
-```
-####返回信息
-
-```
+### removeFromBattle 从战斗状态中去掉
+从战斗准备状态中去掉英雄、技能。
+####传入参数
+```json
 {
-    "errMsg": "",
-    "data": {
-        "revenge": 0,
-        "score": 0,
-        "heroLifeNum": 5,
-        "skillsList": [
-            null,--循环时 需要判断是否是空
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
+}
+```
+####传出参数
+{}
+
+### getStatus 查询战斗状态
+用于界面上的状态显示，包括当前选择的英雄和技能，恢复状态，等级。
+场景分为prepare（准备）和attack（攻击），在准备场景中，已经选择的英雄和技能会自动恢复；在战斗场景中，携带到战斗中的英雄和技能不会自动恢复，并且与准备场景中的英雄和技能数据是隔离的。
+如果当前满血的英雄个数为0，则无法开始攻击。
+如果总的remainingTime为0，说明已经满血或者已经充满技能。
+####传入参数
+```json
+{
+    "genre":"hero / skill",
+    "scene":"selected / unselected for hero"
+}
+```
+####传出参数
+```json
+{
+    "data":{
+        "remainingTime":"所有英雄恢复满血 / 技能充满的总剩余时间",
+        "finishedMoment":"所有英雄恢复满血 / 技能充满的完成时刻",
+        "readyCount":"当前有血的英雄个数 / 技能无此字段",
+        "space":"英雄无此字段 / 选择的技能占用空间",
+        "selectedCount":"当前英雄个数 / 技能无此字段",
+        "capacity":"英雄容量 / 技能容量"
+        "list":[
             {
-                "level": 1,
-                "skillId": 1
-            }
-        ],
-        "heroId": 1,
-        "preyPro": 25,
-        "preyGold": 0
+                "id":"hero id / skill id，注意：list数组下标是排列顺序，不是id",
+                "level":"等级",
+                "remainingTime":"英雄恢复到满血的剩余时间 / 技能无此字段",
+                "readyCount":"当前英雄血量 / 当前充好的技能个数",
+                "selectedCount":"英雄满血时的血量 / 已购买的技能个数",
+                "nextRemainingTime":"英雄无此字段 / 技能充完当前这一个的剩余时间"
+            },
+            ...
+        ]
+    }
+}
+```
+
+### finishNow 快速完成战斗准备
+快速完成所有的英雄回血、技能充能。
+####传入参数
+```json
+{
+    "genre":"hero / skill"
+}
+```
+####传出参数
+```json
+{}
+```
+
+### attack 开始攻击
+本接口要在匹配到对手时，进入观察模式前调用。
+这一刻会以所有已选英雄的当前血量和技能充好的个数，携带进战斗。之后再准备好的技能会移动到战备集合，直到战斗结束，才可以使用。
+####传入参数
+{}
+####传出参数
+{}
+
+### deduct 英雄减血 / 使用技能
+####传入参数
+```json
+{
+    "genre":"hero / skill",
+    "id":"hero id / skill id",
+    "num":"可选参数，减少个数，如果不传，为1"
+}
+```
+####传出参数
+{}
+
+### cure 治疗英雄
+在战斗结束时调用。
+####传入参数
+```json
+{
+    "id":"hero id",
+    "num":"可选参数，加血数量，默认为1"
+}
+```
+####传出参数
+{}
+
+### canAdd 是否可以添加英雄、技能
+####传入参数
+```json
+{
+    "genre":"hero / skill",
+    "id":"hero id / skill id"
+}
+```
+####传出参数
+```json
+{
+    "canAdd":"true / false",
+    "isResource":"true / false, true代表资源足够",
+    "isSpace":"true / false, true代表空间足够",
+    "needResource":{
+        "gold":"资源不够时，所需的金",
+        "hydrogen":"资源不够时，所需的氢"
     },
-    "ret": 0
+    "needGems":"资源不够时，兑换资源所需的宝石数"
 }
-
 ```
 
-### makeSkill
-购买技能
-
+### getRechargingSkill 查询正在充能的技能
 ####传入参数
-```
-
-{
-"skillId": -- 技能 index name
-}
-
-
-```
-
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "data": {
-        "2": [
-            {
-                "finishedTime": 1371262577,
-                "rechargeTime": 500,
-                "skillId": 2
-            }
-        ],
-        "allTime": 1371262577
-    },
-    "ret": 0
-}
-
-```
-
-
-
-
-### getMakeSkillInfo
-获取技能充能列表
+{}
 ####传入参数
-
-```
+```json
 {
-
+    "data":"字段同getStatus，但是只有一个技能的数据。"
 }
-
 ```
 
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "data": {
-        "2": {
-            "finishedTime": 0,
-            "nameEn": "attack",
-            "waitChargedNum": 1,--待充能个数
-            "id": 2,
-            "buyNeedGold": 200,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 10,
-            "hasSeveral": 4, -- 剩余个数
-            "maxLevel": 3,
-            "maxCapacity": 5,--最多拥有个数
-            "status": 0, --状态 -1 未解锁 0 已解锁 1 学习中 2 升级中
-            "level": 1,
-            "chargedTime": 1371234060,
-            "rechargeTime": 500 --单个充能时间
-        },
-        "3": {
-            "finishedTime": 0,
-            "nameEn": "rampage",
-            "waitChargedNum": 0,
-            "id": 3,
-            "hasSeveral": 0,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 190,
-            "buyNeedGold": 200,
-            "maxLevel": 3,
-            "maxCapacity": 5,
-            "status": -1,
-            "level": 1,
-            "chargedTime": 0,
-            "rechargeTime": 500
-        },
-        "4": {
-            "finishedTime": 0,
-            "nameEn": "protect",
-            "waitChargedNum": 0,
-            "id": 4,
-            "hasSeveral": 0,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 20000,
-            "buyNeedGold": 200,
-            "maxLevel": 3,
-            "maxCapacity": 5,
-            "status": -1,
-            "level": 1,
-            "chargedTime": 0,
-            "rechargeTime": 500
-        },
-        "5": {
-            "finishedTime": 0,
-            "nameEn": "fly",
-            "waitChargedNum": 0,
-            "id": 5,
-            "hasSeveral": 0,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 190,
-            "buyNeedGold": 200,
-            "maxLevel": 3,
-            "maxCapacity": 5,
-            "status": -1,
-            "level": 1,
-            "chargedTime": 0,
-            "rechargeTime": 5
-        },
-        "6": {
-            "finishedTime": 0,
-            "nameEn": "magnet",
-            "waitChargedNum": 0,
-            "id": 6,
-            "hasSeveral": 0,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 190,
-            "buyNeedGold": 200,
-            "maxLevel": 3,
-            "maxCapacity": 5,
-            "status": -1,
-            "level": 1,
-            "chargedTime": 0,
-            "rechargeTime": 5
-        },
-        "7": {
-            "finishedTime": 0,
-            "nameEn": "blink",
-            "waitChargedNum": 0,
-            "id": 7,
-            "hasSeveral": 0,
-            "remainingTime": 0,
-            "isUprgade": true,
-            "totalTime": 190,
-            "buyNeedGold": 200,
-            "maxLevel": 3,
-            "maxCapacity": 5,
-            "status": -1,
-            "level": 1,
-            "chargedTime": 0,
-            "rechargeTime": 5
-        },
-        "leftTime": 725,---总的剩余时间 技能充能
-        "allTime": 1371263077 --- 总的完成时间
-    },
-    "ret": 0
-}
-
-```
-
-### chargedFinish
-技能充能 完成时的回调
-
+### getAttackPrice 查询进攻费用
 ####传入参数
-```
+{}
+####传出参数
+```json
 {
-"id":-- 充能Id
-"skillId": -- skillId
+    "gold":"number",
+    "hydrogen":"number"
 }
-
-```
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "ret": 0
-}
-
 ```
 
-### usedSkill
-战斗中使用技能，出战信息的技能个数 和 原本技能个数 都会扣
-
+### getGameOverGems 查询战斗结束的宝石奖励
 ####传入参数
+```json
+{
+    "id":"hero id"
+}
+```
+####传出参数
 ```
 {
-"num":--使用个数
-"skillId": -- 技能 skillId
+    "gems":"奖励宝石数"
 }
-
-```
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "leftNumber": 3,
-    "ret": 0
-}
-
-```
-
-
-
-
-### chargedSkillFull
-宝石完成所有充能
-
-####传入参数
-```
-{
-}
-
-```
-####返回参数
-
-```
-
-{
-    "errMsg": "",
-    "needGem": 1,
-    "ret": 0
-}
-
-```
-
-### deductHeroBlood
-英雄战斗中扣血 战斗信息 和 原本英雄的血量 都会扣
-####传入参数
-```
-{
-"heroId":--英雄Id
-"bloodNum": -- 扣除的血量
-}
-
-```
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-
-### clearUpMakeSkill
-清除技能充能列表以及timelist
-技能升级成功时调用，用宝石充能时调用
-####传入参数
-```
-{
-"skillId": -- 技能名称
-}
-
-```
-
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "ret": 0
-}
-
-```
-
-
-### getAttackInfo
-得到进攻信息
-
-####传入参数
-```
-{
-
-}
-
-```
-
-####返回信息
-
-```
-{
-    "errMsg": "",
-    "data": {
-        "revenge": 0, --是否复仇
-        "score": 0, -- 积分
-        "heroLifeNum": 5,--英雄生命
-        "skillsList": [
-            null,--技能是按Id 顺序排序的· 返回json时会预留一个空位 需要做判断
-            {
-                "level": 1,--技能等级
-                "num": 3,--技能个数
-                "skillId": 2--技能id
-            }
-        ],
-        "heroId": 1,--英雄id
-        "preyPro": 25,--掠夺比例
-        "preyGold": 0--抢得金币
-    },
-    "ret": 0
-}
-
-```
-
-- 
-### getAttackGold
-获取探索的价钱
-
-#####传入参数说明：
-```
-{
-
-}
-```
-####返回参数
-
-```
-{"ret":0,
-"data":100,
-"errMsg":""
-}
-
-```
-
-### getAttackDefault
-返回上一次使用的技能和英雄
-
-result["heroId"] = heroId
-result["skillList"] = skillList
-return result
-####10.16 canCharge()<a id="fight_canCharge"></a>
-#####传入参数说明：
-```
-{
-    skillId -- 技能id
-}
-```
-####返回参数
-
-```
-{"ret":0,
-"needGold":100, --当充能价钱不够时 返回差额
-"needGem":100, -- 差额换成宝石
-"isCharge" : true or false
-"errMsg":""
-}
-
 ```
 
 定时器模块 timerList

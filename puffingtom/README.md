@@ -1609,8 +1609,10 @@ Changelog
 ### 传入参数
 无
 ### 传出参数
+```json
 {
     "data":{
         "capacity":50
     }
 }
+```

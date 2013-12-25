@@ -1649,6 +1649,18 @@ Changelog
 ```json
 {
     "canOffer":"true/false，是否可以发起悬赏",
-    "remainingTime":"悬赏冷却剩余时间"
+    "remainingTime":"悬赏冷却剩余时间",
+    "finishedMoment":"冷却结束时刻",
+    "needGems":"立即发起悬赏所需的宝石数"
+}
+```
+
+### finishNow 立即发起悬赏
+####传入参数
+{}
+####传出参数
+```json
+{
+    "gems":"消费的宝石数"
 }
 ```

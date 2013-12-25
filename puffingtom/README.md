@@ -1641,3 +1641,14 @@ Changelog
     }
 }
 ```
+
+### canOffer 是否可以发起悬赏
+####传入参数
+{}
+####传出参数
+```json
+{
+    "canOffer":"true/false，是否可以发起悬赏",
+    "remainingTime":"悬赏冷却剩余时间"
+}
+```

@@ -162,7 +162,8 @@ Changelog
 {
     "canBuild":"是否可建造/升级",
     "isBuilding":"是否正在建造",
-    "isDependArch":"是否满足建筑科技树依赖条件",
+    "isMaxCount":"是否已到最大个数",
+    "isMaxLevel":"是否已到最高等级",
     "isResource":"是否有足够的资源（金、氢）",
     "needResource":{
         "gold":"金币不够时，还差的金币数",

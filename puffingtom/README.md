@@ -52,6 +52,17 @@ Changelog
 }
 ```
 
+### setUserData 设定用户数据
+#### 传入参数
+```json
+{
+    "key":"数据字段名",
+    "value":"数据字段名，可以是字符串或数"
+}
+```
+#### 传出参数
+{}
+
 ### changeGems 增加/消耗宝石数
 原先的`addGem`和`deductGem`合并，改名为`changeGems`。
 ####传入参数

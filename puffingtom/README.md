@@ -269,21 +269,48 @@ Changelog
 
 ### processStatus
 计算建筑数据的最新状态。
-*传入参数*
-```
+####传入参数
+```json
 {
     "data":{
         json string, "architecture":"lua table string"
     }
 }
 ```
-*传出参数*
-```
+####传出参数
+```json
 {
     "data":"json string"
 }
 ```
 
+### processDestroyed
+处理被摧毁的建筑数据。
+####传入参数
+```json
+{
+    "origin":"未处理的建筑用户数据",
+    "destroyed":{
+        {"id":1, "index":1},
+        {"id":4, "index":2},
+        {"id":12, "index":5},
+        ...
+    }
+}
+```
+####传出参数
+```json
+{
+    "data":"处理后的建筑用户数据"
+}
+```
+
+### rebuild
+恢复被摧毁的建筑。
+####传入参数
+{}
+####传出参数
+{}
 
 英雄模块 hero
 ----------------------

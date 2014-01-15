@@ -1731,3 +1731,39 @@ Changelog
 {}
 ####传出参数
 {}
+
+通知监听者 listener
+---------------------
+### dispatch 分发收到的通知
+处理通知的统一入口，在内部分发到各个模块进行回调。
+####传入参数
+以服务器通知模块get接口返回的数据格式为准，支持原样传入。
+```json
+{
+    "messages":[
+        { 
+            "type":"chat", 
+            "callback":"alliance.chat", 
+            "data":{ 
+                "sender":"xa", 
+                "alliance":12345, 
+                "message":"Welcome to my alliance!" 
+            }, 
+            "timestamp":18948788493 
+        }, 
+        { 
+            "type":"system", 
+            "callback":"alliance.join", 
+            "data":{ 
+                "alliance":12345, 
+                "member":123, 
+                "memberName":"xa" 
+            }, 
+            "timestamp":18948788493 
+        }
+    ]
+}
+```
+####传出参数
+{}
+

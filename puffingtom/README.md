@@ -1772,12 +1772,7 @@ Changelog
 ### getConfig
 查询服务器环境配置。
 ####传入参数
-env的合法值有developement/testing/production。
-```json
-{
-    "env":"服务器环境"
-}
-```
+无
 ####传出参数
 ```json
 {

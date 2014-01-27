@@ -1767,3 +1767,27 @@ Changelog
 ####传出参数
 {}
 
+服务器 server
+---------------------
+### getConfig
+查询服务器环境配置。
+####传入参数
+env的合法值有developement/testing/production。
+```json
+{
+    "env":"服务器环境"
+}
+```
+####传出参数
+```json
+{
+    "data":{
+        "baseURL":"http://dev.weedo.hk/json.php",
+        "setRankURL":"http://dev.weedo.hk/setRank.php",
+        "getRankURL":"http://dev.weedo.hk/getRanks.php",
+        "statURL":"http://dev.weedo.hk/herostarStat.weedo.hk/inputStat.php",
+        "openrestyURL":"http://dev.weedo.hk/starlegend/"
+    }
+}
+```
+

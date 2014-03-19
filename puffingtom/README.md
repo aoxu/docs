@@ -1793,7 +1793,6 @@ Changelog
 ####传入参数
 ```json
 {
-    "period":"周期, 有效值：daily/cumulative, 意思是：每日/累计",
     "id":"可选参数, id"
 }
 ```
@@ -1802,6 +1801,7 @@ Changelog
 {
     "data":{
         "id":123,
+        "period":"周期, 有效值：infinite/daily/cumulative, 意思是：无限/每日/累计",
         "bonus":"奖励的宝石数",
         "type":"整数，成就类型",
         "guide":"bool, 是否引导"
@@ -1814,7 +1814,6 @@ Changelog
 ####传入参数
 ```json
 {
-    "period":"周期, 有效值：daily/cumulative, 意思是：每日/累计",
     "id":123
 }
 ```
@@ -1831,11 +1830,7 @@ Changelog
 ###getStatus
 查询所有成就状态。
 ####传入参数
-```json
-{
-    "period":"周期, 有效值：daily/cumulative, 意思是：每日/累计",
-}
-```
+{}
 ####传出参数
 data字段里是按配置顺序排列的数组，每个成就包含配置和用户数据。
 ```json
@@ -1843,14 +1838,15 @@ data字段里是按配置顺序排列的数组，每个成就包含配置和用�
     "data":[
         {
             "id":123,
+            "period":"周期, 有效值：infinite/daily/cumulative, 意思是：无限/每日/累计",
             "bonus":"奖励的宝石数",
             "type":"整数，成就类型",
             "guide":"bool, 是否引导",
-            "status":"整数，1 未完成/2 已完成/3 已领赏",
+            "goal":"目标值",
             
-            "level":"累计成就专有字段，当前阶段",
-            "count":"累计成就专有字段，累计值",
-            "goal":"累计成就专有字段，目标值"
+            "count":"完成值",
+            "level":"当前阶段",
+            "status":"整数，1 未完成/2 已完成/3 已领赏",
         },
         ...
     ]

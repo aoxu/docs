@@ -675,6 +675,20 @@ Changelog
 ----------------------
 原先的`gameStore`模块改为`shop`，因为game多余，然后store与datastore里的存储意义有可能造成混淆，shop则与COC里一致。
 
+### getNewbieBonus 查询新手奖励
+####传入参数
+无
+####传出参数
+```json
+{
+    "data":[
+        10,
+        10,
+        10
+    ]
+}
+```
+
 ### getNeedGemsForResource 计算兑换资源所需的宝石
 原先的`goldExchangeGem`改名，去除兑换的歧义，这个接口只计算兑换资源需要多少宝石，仅仅是查询，不做兑换操作。由于所需宝石数往往是多个，所以传出参数的`gem`改为`gems`。
 ####传入参数

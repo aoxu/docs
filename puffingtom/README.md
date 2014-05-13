@@ -1419,9 +1419,10 @@ Changelog
 ####传入参数
 ```
 {
-    "destroyedBuildings":"被摧毁的建筑数",
-    "totalBuildings":"总建筑数",
-    "isTownHallDestroyed":"大厅是否被摧毁",
+    "commandCenter":{"destroyed":1, "total":1},
+    "defense":{"destroyed":2, "total":2},
+    "resource":{"destroyed":2, "total":2},
+    "other":{"destroyed":3, "total":5},
     "winScore":"胜利奖励积分",
     "loseScore":"失败减去积分"
 }
